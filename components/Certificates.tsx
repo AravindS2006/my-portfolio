@@ -8,61 +8,61 @@ const certifications: Certification[] = [
     name: "Software Engineer",
     issuer: "HackerRank",
     date: "Mar 2024",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/1.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/1.png"
   },
   {
     name: "Python (Basic)",
     issuer: "HackerRank",
     date: "Aug 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/2.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/2.png"
   },
   {
     name: "Problem Solving (Basic)",
     issuer: "HackerRank",
     date: "Sep 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/3.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/3.png"
   },
   {
     name: "Cyber Space Competitions",
     issuer: "ISRO",
     date: "2020",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/4.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/4.png"
   },
   {
     name: "AI For India 2.0",
     issuer: "GUVI",
     date: "Aug 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/5.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/5.png"
   },
   {
     name: "Global Summit for Career & Skill Development",
     issuer: "GELP",
     date: "2024",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/6.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/6.png"
   },
   {
     name: "Web Development Internship",
     issuer: "Prodigy InfoTech", 
     date: "Dec 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/7.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/7.png"
   },
   {
     name: "Advanced Cpp Training",
     issuer: "IIT Bombay",
     date: "Dec 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/8.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/8.png"
   },
   {
     name: "Data Science with Python",
     issuer: "SkillUp",
     date: "Aug 2023",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/9.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/9.png"
   },
   {
     name: "Introduction to Generative AI",
     issuer: "Google Cloud",
     date: "2024",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/public/asts/certificates/10.png"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/10.png"
   }
 ];
 

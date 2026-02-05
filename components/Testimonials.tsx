@@ -9,14 +9,14 @@ const testimonials: Testimonial[] = [
     role: "CEO of AIRTON",
     company: "AIRTON",
     testimonial: "Aravindselvan's contribution was simply awesome! He brought a fresh perspective to our blockchain project and consistently delivered innovative solutions that exceeded our expectations. A valuable team player.",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/src/assets/Saravanan.jpg"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/src/assets/Saravanan.jpg"
   },
   {
     name: "Vasanth K",
     role: "CFO of AIRTON",
     company: "AIRTON",
     testimonial: "Working with Aravindselvan has been a game-changer. He's an innovative thinker who is always looking for ways to improve our project. His technical skills and collaborative spirit made him a joy to work with.",
-    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/main/src/assets/Vasanth.jpg"
+    image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/src/assets/Vasanth.jpg"
   }
 ];
 
