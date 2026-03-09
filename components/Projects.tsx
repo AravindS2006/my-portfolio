@@ -5,29 +5,57 @@ import { Project } from '../types';
 
 const projects: Project[] = [
   {
+    title: "Edumate",
+    category: "Full-Stack / EdTech",
+    description: "Premium, mobile-first student management dashboard built as a secure proxy over the Sairam Student Portal. Features glassmorphic UI, AES-256 encrypted requests, interactive attendance calendar, GPA tracking, and automated report downloads.",
+    techStack: ["Next.js 15", "React 19", "FastAPI", "TypeScript", "Tailwind CSS"],
+    liveLink: "https://edumate-sairam.vercel.app/",
+    githubLink: "https://github.com/AravindS2006/edumate",
+    stats: "AES-256 Secured"
+  },
+  {
     title: "Ghibli Art Generator",
     category: "Generative AI",
     description: "An AI-based application generating Studio Ghibli-style art from text prompts using Stable Diffusion models. Implemented advanced prompt optimization and LoRA fine-tuning to enhance image generation accuracy by 30%.",
     techStack: ["Next.js", "Hugging Face API", "Flux LoRA", "Stable Diffusion"],
+    liveLink: "https://ghibli-art-generator-five.vercel.app",
     githubLink: "https://github.com/AravindS2006/ghibli-art-generator",
     stats: "+30% Accuracy"
   },
   {
-    title: "Aether Blockchain Viz",
-    category: "AI Analytics & NLP",
-    description: "AI-powered blockchain visualization tool converting data into 3D analytics. Applied NLP-based summarization for real-time smart contract data insights.",
-    techStack: ["React", "Three.js", "Real-time APIs", "NLP", "Data Parsing"],
-    liveLink: "https://aravinds2006-blockchain-visualization.static.hf.space/index.html",
-    githubLink: "https://github.com/AravindS2006/Blockchain-Visualization",
-    stats: "Real-time NLP"
+    title: "Smart Study RAG",
+    category: "RAG / LLM",
+    description: "Production-grade client-side Retrieval-Augmented Generation system for personalized learning. Leverages Google Gemini 2.5 Flash's massive context window, eliminating external vector databases. Upload notes, visualize topic distribution, and chat with your materials.",
+    techStack: ["TypeScript", "React", "Google Gemini 2.5 Flash", "RAG"],
+    liveLink: "https://rag-notes-zeta.vercel.app",
+    githubLink: "https://github.com/AravindS2006/smart-study-RAG",
+    stats: "Zero Vector DB"
+  },
+  {
+    title: "AI Resume Architect",
+    category: "NLP / AI Tools",
+    description: "Portfolio-grade AI resume analyzer powered by Gemini AI. Provides instant feedback, ATS keyword optimization, skill gap analysis, and scores resumes against target job descriptions.",
+    techStack: ["TypeScript", "React", "Gemini AI", "NLP"],
+    githubLink: "https://github.com/AravindS2006/Resume-Architect",
+    stats: "ATS Optimized"
   },
   {
     title: "Andromeda Trader Algo",
     category: "FinTech AI",
-    description: "AI algorithmic trading system integrating deep learning for pattern recognition. Enhanced model accuracy by 22% through dynamic hyperparameter tuning and backtesting automation.",
-    techStack: ["Python", "FastAPI", "React", "Deep Learning", "PyTorch"],
+    description: "AI algorithmic trading platform integrating deep learning for strategy generation and pattern recognition. Features visual strategy builder, backtesting engine, multi-broker support, and AI-powered market insights.",
+    techStack: ["Next.js", "TypeScript", "FastAPI", "Deep Learning", "PyTorch"],
+    liveLink: "https://andromeda-trader.vercel.app",
     githubLink: "https://github.com/AravindS2006/Andromeda-Trader-Algo",
     stats: "+22% Profit Opt."
+  },
+  {
+    title: "Aether Blockchain Viz",
+    category: "AI Analytics & NLP",
+    description: "AI-powered blockchain visualization tool converting data into immersive 3D analytics. Features real-time smart contract insights, NLP-based summarization, transaction lookup, and dynamic theme switching.",
+    techStack: ["JavaScript", "Three.js", "CryptoJS", "NLP", "CSS"],
+    liveLink: "https://aravinds2006-blockchain-visualization.static.hf.space/index.html",
+    githubLink: "https://github.com/AravindS2006/Blockchain-Visualization",
+    stats: "Real-time NLP"
   }
 ];
 
