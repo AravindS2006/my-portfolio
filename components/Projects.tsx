@@ -9,8 +9,7 @@ const projects: Project[] = [
     category: "Generative AI",
     description: "An AI-based application generating Studio Ghibli-style art from text prompts using Stable Diffusion models. Implemented advanced prompt optimization and LoRA fine-tuning to enhance image generation accuracy by 30%.",
     techStack: ["Next.js", "Hugging Face API", "Flux LoRA", "Stable Diffusion"],
-    liveLink: "#",
-    githubLink: "#",
+    githubLink: "https://github.com/AravindS2006/ghibli-art-generator",
     stats: "+30% Accuracy"
   },
   {
@@ -18,8 +17,8 @@ const projects: Project[] = [
     category: "AI Analytics & NLP",
     description: "AI-powered blockchain visualization tool converting data into 3D analytics. Applied NLP-based summarization for real-time smart contract data insights.",
     techStack: ["React", "Three.js", "Real-time APIs", "NLP", "Data Parsing"],
-    liveLink: "#",
-    githubLink: "#",
+    liveLink: "https://aravinds2006-blockchain-visualization.static.hf.space/index.html",
+    githubLink: "https://github.com/AravindS2006/Blockchain-Visualization",
     stats: "Real-time NLP"
   },
   {
@@ -27,8 +26,7 @@ const projects: Project[] = [
     category: "FinTech AI",
     description: "AI algorithmic trading system integrating deep learning for pattern recognition. Enhanced model accuracy by 22% through dynamic hyperparameter tuning and backtesting automation.",
     techStack: ["Python", "FastAPI", "React", "Deep Learning", "PyTorch"],
-    liveLink: "#",
-    githubLink: "#",
+    githubLink: "https://github.com/AravindS2006/Andromeda-Trader-Algo",
     stats: "+22% Profit Opt."
   }
 ];
@@ -68,12 +66,16 @@ const Projects: React.FC = () => {
                     {project.category}
                  </div>
                  <div className="flex gap-3">
-                    <a href={project.githubLink} className="text-slate-400 hover:text-white transition-colors" title="View Source">
-                        <Github className="w-5 h-5" />
-                    </a>
-                    <a href={project.liveLink} className="text-slate-400 hover:text-white transition-colors" title="Live Demo">
-                        <ExternalLink className="w-5 h-5" />
-                    </a>
+                    {project.githubLink && (
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" title="View Source">
+                          <Github className="w-5 h-5" />
+                      </a>
+                    )}
+                    {project.liveLink && (
+                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" title="Live Demo">
+                          <ExternalLink className="w-5 h-5" />
+                      </a>
+                    )}
                  </div>
               </div>
 
