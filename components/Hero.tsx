@@ -18,16 +18,20 @@ const stats = [
 
 const useCountUp = (target: number, duration = 1500, start = false) => {
   const [count, setCount] = useState(0);
+  const startedRef = useRef(false);
   useEffect(() => {
-    if (!start) return;
+    if (!start || startedRef.current) return;
+    startedRef.current = true;
     let startTime: number | null = null;
+    let animFrameId: number;
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) animFrameId = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
+    animFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animFrameId);
   }, [target, duration, start]);
   return count;
 };

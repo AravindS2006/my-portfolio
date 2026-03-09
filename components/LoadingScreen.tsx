@@ -10,6 +10,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [phase, setPhase] = useState<'loading' | 'done'>('loading');
 
   useEffect(() => {
+    const timeoutIds: ReturnType<typeof setTimeout>[] = [];
     const steps = [
       { target: 30, delay: 0 },
       { target: 60, delay: 400 },
@@ -18,15 +19,16 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     ];
 
     steps.forEach(({ target, delay }) => {
-      setTimeout(() => setProgress(target), delay);
+      timeoutIds.push(setTimeout(() => setProgress(target), delay));
     });
 
     const completeTimer = setTimeout(() => {
       setPhase('done');
       setTimeout(onComplete, 600);
     }, 1900);
+    timeoutIds.push(completeTimer);
 
-    return () => clearTimeout(completeTimer);
+    return () => timeoutIds.forEach(clearTimeout);
   }, [onComplete]);
 
   const lines = [

@@ -18,10 +18,9 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('home');
   const [isLoaded, setIsLoaded] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [loadingDone, setLoadingDone] = useState(false);
 
   const handleLoadingComplete = useCallback(() => {
-    setLoadingDone(true);
+    // Brief delay lets the exit animation complete before showing content
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
