@@ -11,9 +11,8 @@ const Experience: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          <span className="text-neon-blue">04.</span> Professional Experience
-        </h2>
+        <p className="text-neon-blue font-mono text-sm tracking-widest mb-3">03. EXPERIENCE</p>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Professional Experience</h2>
         <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full"></div>
       </motion.div>
 

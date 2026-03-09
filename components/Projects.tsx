@@ -69,10 +69,10 @@ const Projects: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          <span className="text-neon-blue">03.</span> Featured Projects
-        </h2>
-        <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full"></div>
+        <p className="text-neon-blue font-mono text-sm tracking-widest mb-3">04. PROJECTS</p>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Featured Projects</h2>
+        <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full mb-4"></div>
+        <p className="text-slate-400 max-w-xl mx-auto text-sm">A selection of AI-powered applications and tools I've built — from generative models to full-stack platforms.</p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -138,7 +138,7 @@ const Projects: React.FC = () => {
         ))}
       </div>
 
-      {/* Suggestion for interaction */}
+      {/* CTA to GitHub */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -146,17 +146,33 @@ const Projects: React.FC = () => {
         transition={{ delay: 0.6 }}
         className="mt-16 text-center"
       >
-        <div className="inline-block p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 border border-white/10 max-w-2xl mx-auto shadow-xl">
+        <div className="inline-flex flex-col items-center p-8 rounded-2xl bg-gradient-to-r from-slate-900/80 to-slate-800/80 border border-white/10 max-w-2xl mx-auto shadow-xl backdrop-blur">
             <h4 className="text-lg font-bold text-white mb-2 flex items-center justify-center gap-2">
                 <Brain className="text-neon-purple" />
-                Interactive AI Demo
+                Want to see more?
             </h4>
-            <p className="text-slate-400 text-sm mb-4">
-                Explore a simplified version of the Image Generation model running directly in your browser (TensorFlow.js).
+            <p className="text-slate-400 text-sm mb-5">
+                Explore all my open-source AI projects, tools, and experiments on GitHub and Hugging Face.
             </p>
-            <button className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-colors cursor-not-allowed opacity-70">
-                Launch Model (Coming Soon)
-            </button>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <a 
+                href="https://github.com/AravindS2006" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-all hover:scale-105"
+              >
+                <Github className="w-4 h-4" />
+                View GitHub
+              </a>
+              <a 
+                href="https://huggingface.co/AravindS2006" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue border border-neon-blue/20 rounded-lg text-sm font-medium transition-all hover:scale-105"
+              >
+                🤗 Hugging Face
+              </a>
+            </div>
         </div>
       </motion.div>
     </div>
