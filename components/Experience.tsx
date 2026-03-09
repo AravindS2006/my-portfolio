@@ -73,16 +73,7 @@ const Experience: React.FC = () => {
                 <h4 className="text-neon-blue font-bold mb-2">Open Source Impact</h4>
                 <p className="text-slate-400 text-sm">Built and published 10+ open-source AI projects on GitHub and Hugging Face Spaces, contributing to the broader developer community.</p>
               </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="bg-card-bg/50 p-6 rounded-lg border border-white/5 hover:bg-white/5 transition-colors"
-              >
-                <h4 className="text-neon-purple font-bold mb-2">Hackathon Finalist</h4>
-                <p className="text-slate-400 text-sm">Finalist at national innovation events showcasing AI automation and generative model integration workflows.</p>
-              </motion.div>
+
           </div>
       </div>
     </div>

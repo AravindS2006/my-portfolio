@@ -1,10 +1,9 @@
 import React from 'react';
-import { BookOpen, Award, Code2, GraduationCap, Trophy, Cpu } from 'lucide-react';
+import { BookOpen, Award, Code2, GraduationCap, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const highlights = [
   { icon: Code2, value: '10+', label: 'Open Source AI Projects', color: 'text-neon-blue', bg: 'bg-neon-blue/10', border: 'border-neon-blue/20' },
-  { icon: Trophy, value: 'Finalist', label: 'AI Hackathons', color: 'text-neon-purple', bg: 'bg-neon-purple/10', border: 'border-neon-purple/20' },
   { icon: Cpu, value: '73%+', label: 'Model Accuracy', color: 'text-green-400', bg: 'bg-green-400/10', border: 'border-green-400/20' },
   { icon: BookOpen, value: '10+', label: 'Certifications', color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
 ];
