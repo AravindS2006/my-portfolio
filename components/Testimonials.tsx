@@ -45,9 +45,8 @@ const Testimonials: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          Testimonials
-        </h2>
+        <p className="text-neon-blue font-mono text-sm tracking-widest mb-3">06. TESTIMONIALS</p>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Testimonials</h2>
         <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full mb-4"></div>
         <p className="text-slate-400">Feedback from leadership</p>
       </motion.div>

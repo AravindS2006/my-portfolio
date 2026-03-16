@@ -33,9 +33,8 @@ const Contact: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          <span className="text-neon-blue">06.</span> Get In Touch
-        </h2>
+        <p className="text-neon-blue font-mono text-sm tracking-widest mb-3">07. CONTACT</p>
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
         <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full"></div>
       </motion.div>
 
