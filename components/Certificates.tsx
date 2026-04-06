@@ -41,7 +41,7 @@ const certifications: Certification[] = [
     image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/6.png"
   },
   {
-    name: "Web Development Internship",
+    name: "Machine Learning Internship",
     issuer: "Prodigy InfoTech", 
     date: "Dec 2023",
     image: "https://raw.githubusercontent.com/AravindS2006/my-portfolio/dev/public/asts/certificates/7.png"
