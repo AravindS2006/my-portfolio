@@ -64,7 +64,7 @@ Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expe
 *TypeScript · React.js · Node.js · FastAPI · Python · Vercel · Render*
 - Designed and deployed a mobile-optimized student dashboard for Sri Sairam Engineering College with real-time attendance and data visualization.
 - Achieved <2s load times across Vercel (frontend) + Render (Python FastAPI backend) deployment stack.
-- 🔗 [Live Demo](https://edumate-sairam.vercel.app) | [GitHub](https://github.com/AravindS2006/edumate)
+- 🔗 [Live Demo](https://edumate1-sairam.vercel.app) | [GitHub](https://github.com/AravindS2006/edumate)
 
 ### 📄 Resume-Architect — AI-Powered Resume Optimization Engine (2026)
 *Python · Gemini API · LLMs · Vector Databases · Google AI Studio*
