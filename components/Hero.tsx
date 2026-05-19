@@ -54,6 +54,7 @@ const StatCard: React.FC<{ value: number; suffix: string; label: string; delay: 
 };
 
 const Hero: React.FC = () => {
+  const resumeUrl = '/assets/resume.pdf';
   const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -173,7 +174,7 @@ const Hero: React.FC = () => {
         </a>
 
         <a 
-          href="https://drive.google.com/drive/folders/1xgVNp1OqPbIrNg1TXqFijczpd2VQ-gTk"
+          href={resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-7 py-3 bg-white/5 text-white border border-white/15 rounded-full hover:bg-neon-purple/10 hover:border-neon-purple/50 transition-all"
