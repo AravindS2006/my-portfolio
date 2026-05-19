@@ -54,7 +54,7 @@ const StatCard: React.FC<{ value: number; suffix: string; label: string; delay: 
 };
 
 const Hero: React.FC = () => {
-  const resumeUrl = 'https://github.com/AravindS2006/my-portfolio/blob/main/assets/resume.pdf';
+  const resumeUrl = '/assets/resume.pdf';
   const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
