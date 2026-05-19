@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const onlineProfiles = [
   { name: 'LeetCode', url: 'https://leetcode.com/Aravindselvan', color: 'text-yellow-400', bg: 'hover:bg-yellow-400/10' },
@@ -18,18 +19,61 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [activeField, setActiveField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    const env = import.meta.env as Record<string, string | undefined>;
+    const serviceId =
+      env.VITE_EMAILJS_SERVICE_ID ||
+      env.EMAILJS_SERVICE_ID ||
+      process.env.VITE_EMAILJS_SERVICE_ID ||
+      process.env.EMAILJS_SERVICE_ID ||
+      '';
+    const templateId =
+      env.VITE_EMAILJS_TEMPLATE_ID ||
+      env.EMAILJS_TEMPLATE_ID ||
+      process.env.VITE_EMAILJS_TEMPLATE_ID ||
+      process.env.EMAILJS_TEMPLATE_ID ||
+      'template_oztcb36';
+    const publicKey =
+      env.VITE_EMAILJS_PUBLIC_KEY ||
+      env.EMAILJS_PUBLIC_KEY ||
+      process.env.VITE_EMAILJS_PUBLIC_KEY ||
+      process.env.EMAILJS_PUBLIC_KEY ||
+      'NIJzrybBeRV4_FTXD';
+
+    if (!serviceId.trim()) {
+      setSubmitError('Email service is not configured. Please try again later.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId.trim(),
+        templateId.trim(),
+        {
+          from_name: formState.name,
+          from_email: formState.email,
+          message: formState.message,
+          reply_to: formState.email
+        },
+        { publicKey: publicKey.trim() }
+      );
+
       setIsSubmitting(false);
       setSubmitted(true);
       setFormState({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitted(false), 3000);
-    }, 1500);
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError('Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -187,6 +231,9 @@ const Contact: React.FC = () => {
                     </>
                   )}
                 </button>
+                {submitError && (
+                  <p className="text-red-400 text-sm">{submitError}</p>
+                )}
               </form>
            </div>
         </motion.div>
