@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -10,18 +11,45 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [activeField, setActiveField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'NIJzrybBeRV4_FTXD';
+
+    if (!serviceId || !templateId || !publicKey) {
+      setSubmitError('Email service is not configured. Please try again later.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formState.name,
+          from_email: formState.email,
+          message: formState.message,
+          reply_to: formState.email
+        },
+        { publicKey }
+      );
+
       setIsSubmitting(false);
       setSubmitted(true);
       setFormState({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitted(false), 3000);
-    }, 1500);
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError('Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -179,6 +207,9 @@ const Contact: React.FC = () => {
                     </>
                   )}
                 </button>
+                {submitError && (
+                  <p className="text-red-400 text-sm">{submitError}</p>
+                )}
               </form>
            </div>
         </motion.div>
