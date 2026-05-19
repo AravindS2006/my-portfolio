@@ -107,7 +107,7 @@ Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expe
 |----------|---------|
 | LeetCode | [leetcode.com/Aravindselvan](https://leetcode.com/Aravindselvan) |
 | HackerRank | [hackerrank.com/aravindselvan201](https://hackerrank.com/aravindselvan201) |
-| SkillRack | [skillrack.com/profile/441693](https://skillrack.com/profile/441693) |
+| SkillRack | [skillrack.com/profile/441693](https://www.skillrack.com/faces/resume.xhtml?id=441693&key=c2110db4f08939a1bfc90e35bf38dec1b85f0453) |
 | Microsoft Learn | [learn.microsoft.com/users/aravindselvanc-2555](https://learn.microsoft.com/users/aravindselvanc-2555) |
 | GeeksForGeeks | [geeksforgeeks.org/user/aravindselvan2006](https://geeksforgeeks.org/user/aravindselvan2006) |
 
