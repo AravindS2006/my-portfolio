@@ -12,7 +12,7 @@ const roles = [
 const stats = [
   { value: 25, suffix: '+', label: 'AI/ML Systems' },
   { value: 5420, suffix: '$', label: 'IEEE Funding' },
-  { value: 4, suffix: 'th', label: 'IMC Prosperity Finalist' },
+  { value: 3155, suffix: 'th', label: 'IMC Prosperity 4 Finalist' },
   { value: 15, suffix: '+', label: 'Certifications' },
 ];
 
@@ -54,7 +54,7 @@ const StatCard: React.FC<{ value: number; suffix: string; label: string; delay: 
 };
 
 const Hero: React.FC = () => {
-  const resumeUrl = '/assets/resume.pdf';
+  const resumeUrl = 'https://github.com/AravindS2006/my-portfolio/blob/main/assets/resume.pdf';
   const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
