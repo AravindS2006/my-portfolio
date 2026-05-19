@@ -34,7 +34,7 @@ const projects: Project[] = [
     category: "Full-Stack / EdTech",
     description: "Mobile-optimized student dashboard for Sri Sairam Engineering College with real-time attendance and data visualization. Achieved <2s load times across Vercel (frontend) + Render (Python FastAPI backend) deployment stack.",
     techStack: ["TypeScript", "React.js", "Node.js", "FastAPI", "Python", "Vercel", "Render"],
-    liveLink: "https://edumate-sairam.vercel.app/",
+    liveLink: "https://edumate1-sairam.vercel.app/",
     githubLink: "https://github.com/AravindS2006/edumate",
     stats: "<2s Load Time"
   },
