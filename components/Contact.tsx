@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const onlineProfiles = [
   { name: 'LeetCode', url: 'https://leetcode.com/Aravindselvan', color: 'text-yellow-400', bg: 'hover:bg-yellow-400/10' },
   { name: 'HackerRank', url: 'https://hackerrank.com/aravindselvan201', color: 'text-green-400', bg: 'hover:bg-green-400/10' },
-  { name: 'SkillRack', url: 'https://skillrack.com/profile/441693', color: 'text-blue-400', bg: 'hover:bg-blue-400/10' },
+  { name: 'SkillRack', url: 'https://www.skillrack.com/faces/resume.xhtml?id=441693&key=c2110db4f08939a1bfc90e35bf38dec1b85f0453', color: 'text-blue-400', bg: 'hover:bg-blue-400/10' },
   { name: 'Microsoft Learn', url: 'https://learn.microsoft.com/users/aravindselvanc-2555', color: 'text-neon-blue', bg: 'hover:bg-neon-blue/10' },
   { name: 'GeeksForGeeks', url: 'https://geeksforgeeks.org/user/aravindselvan2006', color: 'text-green-500', bg: 'hover:bg-green-500/10' },
 ];
