@@ -17,6 +17,8 @@ const navItems: NavItem[] = [
 ];
 
 const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
+  const resumeUrl = '/assets/resume.pdf';
+  const resumeDownloadName = 'Aravindselvan-C-Resume.pdf';
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -95,7 +97,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               </a>
             ))}
             <a
-              href="https://drive.google.com/drive/folders/1xgVNp1OqPbIrNg1TXqFijczpd2VQ-gTk"
+              href={resumeUrl}
+              download={resumeDownloadName}
               target="_blank"
               rel="noopener noreferrer"
               className="ml-2 inline-flex items-center gap-2 px-4 py-2 bg-neon-blue/10 border border-neon-blue/30 text-neon-blue rounded-lg text-sm font-medium hover:bg-neon-blue hover:text-dark-bg transition-all duration-200"
@@ -136,7 +139,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               </a>
             ))}
             <a
-              href="https://drive.google.com/drive/folders/1xgVNp1OqPbIrNg1TXqFijczpd2VQ-gTk"
+              href={resumeUrl}
+              download={resumeDownloadName}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-3 py-2.5 text-neon-blue font-medium"
