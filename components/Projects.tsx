@@ -9,7 +9,7 @@ const projects: Project[] = [
     category: "AI / IoT / Healthcare",
     description: "ML-powered hardware prototype for non-invasive glaucoma screening via IOP detection. Integrated real-time sensor data pipelines with custom ESP32 firmware for live biometric capture and on-device classification. Awarded IEEE funding of $5,420.",
     techStack: ["Python", "TensorFlow", "ESP32", "Computer Vision", "IoT"],
-    githubLink: "https://github.com/AravindS2006",
+    githubLink: "https://github.com/AravindS2006/airton-web-final",
     stats: "IEEE Funded: $5,420"
   },
   {
@@ -17,7 +17,7 @@ const projects: Project[] = [
     category: "FinTech / Reinforcement Learning",
     description: "Autonomous RL trading agent for XAUUSD with custom reward functions incorporating Sharpe Ratio and max-drawdown metrics. Full backtesting pipeline — agent generates buy/sell/hold signals with zero manual intervention.",
     techStack: ["Python", "TensorFlow", "Reinforcement Learning", "Pandas", "NumPy"],
-    githubLink: "https://github.com/AravindS2006",
+    githubLink: "https://github.com/AravindS2006/Tradenza",
     stats: "Zero-intervention signals"
   },
   {
