@@ -19,11 +19,27 @@ const Contact: React.FC = () => {
     setSubmitError('');
     setIsSubmitting(true);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'NIJzrybBeRV4_FTXD';
+    const env = import.meta.env as Record<string, string | undefined>;
+    const serviceId =
+      env.VITE_EMAILJS_SERVICE_ID ||
+      env.EMAILJS_SERVICE_ID ||
+      process.env.VITE_EMAILJS_SERVICE_ID ||
+      process.env.EMAILJS_SERVICE_ID ||
+      '';
+    const templateId =
+      env.VITE_EMAILJS_TEMPLATE_ID ||
+      env.EMAILJS_TEMPLATE_ID ||
+      process.env.VITE_EMAILJS_TEMPLATE_ID ||
+      process.env.EMAILJS_TEMPLATE_ID ||
+      'template_oztcb36';
+    const publicKey =
+      env.VITE_EMAILJS_PUBLIC_KEY ||
+      env.EMAILJS_PUBLIC_KEY ||
+      process.env.VITE_EMAILJS_PUBLIC_KEY ||
+      process.env.EMAILJS_PUBLIC_KEY ||
+      'NIJzrybBeRV4_FTXD';
 
-    if (!serviceId || !templateId || !publicKey) {
+    if (!serviceId.trim()) {
       setSubmitError('Email service is not configured. Please try again later.');
       setIsSubmitting(false);
       return;
@@ -31,15 +47,15 @@ const Contact: React.FC = () => {
 
     try {
       await emailjs.send(
-        serviceId,
-        templateId,
+        serviceId.trim(),
+        templateId.trim(),
         {
           from_name: formState.name,
           from_email: formState.email,
           message: formState.message,
           reply_to: formState.email
         },
-        { publicKey }
+        { publicKey: publicKey.trim() }
       );
 
       setIsSubmitting(false);
