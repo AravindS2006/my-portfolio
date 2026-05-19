@@ -3,9 +3,9 @@ import { BookOpen, Award, Code2, GraduationCap, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const highlights = [
-  { icon: Code2, value: '10+', label: 'Open Source AI Projects', color: 'text-neon-blue', bg: 'bg-neon-blue/10', border: 'border-neon-blue/20' },
-  { icon: Cpu, value: '73%+', label: 'Model Accuracy', color: 'text-green-400', bg: 'bg-green-400/10', border: 'border-green-400/20' },
-  { icon: BookOpen, value: '10+', label: 'Certifications', color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
+  { icon: Code2, value: '25+', label: 'End-to-End AI/ML Systems', color: 'text-neon-blue', bg: 'bg-neon-blue/10', border: 'border-neon-blue/20' },
+  { icon: Cpu, value: '$5,420', label: 'IEEE Funding (AirTon)', color: 'text-green-400', bg: 'bg-green-400/10', border: 'border-green-400/20' },
+  { icon: BookOpen, value: '15+', label: 'Certifications', color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
 ];
 
 const About: React.FC = () => {
@@ -33,17 +33,14 @@ const About: React.FC = () => {
           className="space-y-5 text-slate-300 text-base leading-relaxed"
         >
           <p>
-            I am an <strong className="text-white">AI Engineer and Prompt Engineering Specialist</strong> based in Chennai, India. 
-            My passion lies in bridging the gap between theoretical machine learning models and scalable, real-world applications.
+            I am a <strong className="text-white">Generative AI Engineer & AI/ML Developer</strong> based in Chennai, Tamil Nadu, India.
+            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in machine learning, generative AI, and full-stack development.
           </p>
           <p>
-            Currently pursuing my B.E. in Electronics & Communication Engineering, I spearhead AI-driven academic projects focusing on 
-            <span className="text-neon-blue font-medium"> Generative AI</span>, <span className="text-neon-purple font-medium">LLM Fine-Tuning</span>, and 
-            <span className="text-neon-blue font-medium"> RAG pipelines</span>.
+            I have engineered 25+ end-to-end AI/ML systems spanning RL agents, latent diffusion pipelines, and NLP engines. Secured IEEE funding of <span className="text-neon-blue font-medium">$5,420</span> for the AirTon medical AI prototype and reached the finals of the <span className="text-neon-purple font-medium">IMC Prosperity 4</span> global algorithmic trading competition.
           </p>
           <p>
-            I have a proven track record of developing high-accuracy models, including glaucoma prediction systems achieving <span className="text-white font-semibold">73%+ accuracy</span> and algorithmic trading bots with <span className="text-white font-semibold">+22% accuracy improvements</span>. 
-            My workflow integrates advanced prompt optimization with modern full-stack technologies to build intuitive AI-powered web applications.
+            Certified by <span className="text-white font-semibold">Google, AWS, IIT Bombay, and NPTEL</span>. My workflow integrates Reinforcement Learning, Generative AI, and modern full-stack technologies to build scalable, real-world AI applications.
           </p>
           
           {/* Education */}
@@ -53,10 +50,19 @@ const About: React.FC = () => {
             </h3>
             <div className="bg-white/5 p-4 rounded-xl border border-white/10 hover:border-neon-blue/30 transition-all group">
               <div className="flex justify-between items-start mb-1 flex-wrap gap-2">
-                <span className="text-white font-medium">B.E. Electronics & Communication Engineering</span>
-                <span className="text-neon-blue text-xs font-mono bg-neon-blue/10 px-2 py-1 rounded-full">2023 – 2027</span>
+                <span className="text-white font-medium">B.E. – Electronics & Communications Engineering</span>
+                <span className="text-neon-blue text-xs font-mono bg-neon-blue/10 px-2 py-1 rounded-full">Sep 2023 – May 2027</span>
               </div>
               <div className="text-slate-400 text-sm">Sri Sairam Engineering College, Chennai</div>
+              <div className="text-slate-500 text-xs mt-1">CGPA: 6.95 / 10.0</div>
+            </div>
+            <div className="bg-white/5 p-4 rounded-xl border border-white/10 hover:border-neon-blue/30 transition-all group mt-3">
+              <div className="flex justify-between items-start mb-1 flex-wrap gap-2">
+                <span className="text-white font-medium">Class 12 – Computer Mathematics</span>
+                <span className="text-neon-blue text-xs font-mono bg-neon-blue/10 px-2 py-1 rounded-full">June 2022 – May 2023</span>
+              </div>
+              <div className="text-slate-400 text-sm">Akshaya Academy Matric Hr. Sec. School, Dindigul</div>
+              <div className="text-slate-500 text-xs mt-1">Score: 86% / 100%</div>
             </div>
           </div>
 
@@ -67,10 +73,12 @@ const About: React.FC = () => {
             </h3>
             <div className="space-y-2">
               {[
-                { dot: 'bg-green-400', name: 'Generative AI', issuer: 'Google Cloud' },
-                { dot: 'bg-yellow-400', name: 'Machine Learning on AWS', issuer: 'Amazon' },
-                { dot: 'bg-blue-400', name: 'Advanced Prompt Engineering', issuer: 'LinkedIn' },
-                { dot: 'bg-purple-400', name: 'AI for Students', issuer: 'LinkedIn' },
+                { dot: 'bg-green-400', name: 'Introduction to Generative AI', issuer: 'Google Cloud / Coursera' },
+                { dot: 'bg-yellow-400', name: 'Machine Learning on AWS', issuer: 'Amazon Web Services' },
+                { dot: 'bg-blue-400', name: 'Advanced C++ (85%) & Java (67.5%)', issuer: 'IIT Bombay' },
+                { dot: 'bg-purple-400', name: 'Advanced Prompt Engineering', issuer: 'LinkedIn Learning' },
+                { dot: 'bg-pink-400', name: 'Data Science with Python (62%)', issuer: 'NPTEL' },
+                { dot: 'bg-orange-400', name: 'Claude Code 101 & AI Fluency', issuer: 'Anthropic / Claude' },
               ].map((cert) => (
                 <div key={cert.name} className="flex items-center gap-3 text-sm text-slate-300 py-1.5 px-3 rounded-lg bg-white/3 hover:bg-white/5 transition-colors">
                   <div className={`w-2 h-2 rounded-full ${cert.dot} flex-shrink-0`}></div>
@@ -121,7 +129,7 @@ const About: React.FC = () => {
               <span className="text-xs font-mono text-green-400 tracking-wider">CURRENTLY BUILDING</span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              AI-powered education platforms, algorithmic trading systems with deep learning, and exploring multi-modal LLM applications with real-time inference.
+              Building AirTon (IEEE-funded glaucoma detection device), Tradenza RL trading agent for XAUUSD, and the edumate smart student dashboard — while exploring multi-modal LLM applications with real-time inference.
             </p>
           </motion.div>
         </motion.div>

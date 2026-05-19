@@ -108,11 +108,11 @@ const App: React.FC = () => {
                   ARAVIND<span className="text-neon-blue">.AI</span>
                 </span>
                 <span className="text-slate-600">|</span>
-                <span className="text-slate-500 text-sm font-mono">AI Engineer & Prompt Specialist</span>
+                <span className="text-slate-500 text-sm font-mono">Generative AI Engineer | AI/ML Developer</span>
               </div>
               <div className="text-center md:text-right">
                 <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Aravindselvan C. All rights reserved.</p>
-                <p className="mt-1 text-xs text-slate-600">Innovating with Intelligence — Building Future-Ready AI Solutions.</p>
+                <p className="mt-1 text-xs text-slate-600">Engineered 25+ AI/ML systems — RL agents, diffusion pipelines, NLP engines.</p>
               </div>
             </div>
           </div>

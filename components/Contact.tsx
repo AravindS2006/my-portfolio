@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const onlineProfiles = [
+  { name: 'LeetCode', url: 'https://leetcode.com/Aravindselvan', color: 'text-yellow-400', bg: 'hover:bg-yellow-400/10' },
+  { name: 'HackerRank', url: 'https://hackerrank.com/aravindselvan201', color: 'text-green-400', bg: 'hover:bg-green-400/10' },
+  { name: 'SkillRack', url: 'https://skillrack.com/profile/441693', color: 'text-blue-400', bg: 'hover:bg-blue-400/10' },
+  { name: 'Microsoft Learn', url: 'https://learn.microsoft.com/users/aravindselvanc-2555', color: 'text-neon-blue', bg: 'hover:bg-neon-blue/10' },
+  { name: 'GeeksForGeeks', url: 'https://geeksforgeeks.org/user/aravindselvan2006', color: 'text-green-500', bg: 'hover:bg-green-500/10' },
+];
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -59,7 +67,7 @@ const Contact: React.FC = () => {
           
           <div className="space-y-4 pt-6">
             <a 
-              href="mailto:hello.aravind@zohomail.in" 
+              href="mailto:aravindselvan2006@gmail.com" 
               className="group flex items-center gap-4 text-slate-300 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-neon-blue/50 hover:bg-white/10 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-full bg-dark-bg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -67,7 +75,7 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <span className="text-xs text-slate-500 block uppercase tracking-wider">Email</span>
-                <span className="font-mono text-white group-hover:text-neon-blue transition-colors">hello.aravind@zohomail.in</span>
+                <span className="font-mono text-white group-hover:text-neon-blue transition-colors">aravindselvan2006@gmail.com</span>
               </div>
             </a>
             
@@ -203,6 +211,33 @@ const Contact: React.FC = () => {
             </span>
             <span className="font-medium">GitHub</span>
           </a>
+      </motion.div>
+
+      {/* Competitive Programming & Online Profiles */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 }}
+        className="mt-12 pt-8 border-t border-white/5"
+      >
+        <div className="flex items-center gap-3 mb-6 justify-center">
+          <Code2 className="text-neon-blue w-5 h-5" />
+          <h4 className="text-lg font-bold text-white">Competitive Programming & Online Profiles</h4>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {onlineProfiles.map((profile) => (
+            <a
+              key={profile.name}
+              href={profile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 ${profile.color} ${profile.bg} hover:border-current transition-all font-mono text-sm font-medium`}
+            >
+              {profile.name}
+            </a>
+          ))}
+        </div>
       </motion.div>
     </div>
   );

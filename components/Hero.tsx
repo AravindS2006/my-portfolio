@@ -3,17 +3,17 @@ import { ArrowRight, Github, Linkedin, Download, ChevronDown } from 'lucide-reac
 import { motion } from 'framer-motion';
 
 const roles = [
-  'AI Engineer & Prompt Engineering Specialist',
-  'Generative AI Developer',
-  'LLM Fine-Tuning Expert',
+  'Generative AI Engineer',
+  'AI/ML Developer',
   'Full-Stack AI Builder',
+  'RL & LLM Systems Developer',
 ];
 
 const stats = [
-  { value: 10, suffix: '+', label: 'AI Projects' },
-  { value: 73, suffix: '%', label: 'Model Accuracy' },
-  { value: 22, suffix: '%', label: 'Trading Gain' },
-  { value: 10, suffix: '+', label: 'Certifications' },
+  { value: 25, suffix: '+', label: 'AI/ML Systems' },
+  { value: 5420, suffix: '$', label: 'IEEE Funding' },
+  { value: 4, suffix: 'th', label: 'IMC Prosperity Finalist' },
+  { value: 15, suffix: '+', label: 'Certifications' },
 ];
 
 const useCountUp = (target: number, duration = 1500, start = false) => {
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
         transition={{ duration: 0.8, delay: 0.6 }}
         className="max-w-2xl text-base text-slate-400 mb-8 leading-relaxed"
       >
-        Innovating with Intelligence — Building Future-Ready AI Solutions. Specializing in Generative AI, LLM fine-tuning, RAG pipelines, and integrating deep learning into scalable production environments.
+        Final-year B.E. ECE student at Sri Sairam Engineering College. Engineered 25+ end-to-end AI/ML systems spanning RL agents, latent diffusion pipelines, and NLP engines. Secured IEEE funding of $5,420 for AirTon and reached the finals of the IMC Prosperity 4 global algorithmic trading competition.
       </motion.p>
 
       {/* CTA Buttons */}
@@ -236,10 +236,10 @@ const Hero: React.FC = () => {
             <span>python3 model_training.py --optimize --epochs 50</span>
           </div>
           <div className="text-slate-400 pl-4 space-y-1">
-            <div><span className="text-yellow-400">[INFO]</span> Loading pre-trained weights...</div>
-            <div><span className="text-blue-400">[INFO]</span> Initializing RAG pipeline with Gemini 2.5 Flash...</div>
-            <div><span className="text-green-400">[SUCCESS]</span> Model accuracy improved by <span className="text-white font-bold">22%</span></div>
-            <div><span className="text-green-400">[READY]</span> Interactive inference engine online.</div>
+            <div><span className="text-yellow-400">[INFO]</span> Loading AirTon glaucoma detection model...</div>
+            <div><span className="text-blue-400">[INFO]</span> Initializing Tradenza RL agent for XAUUSD...</div>
+            <div><span className="text-green-400">[SUCCESS]</span> IEEE funding secured: <span className="text-white font-bold">$5,420</span></div>
+            <div><span className="text-green-400">[READY]</span> 25+ AI/ML systems deployed and running.</div>
           </div>
           <div className="flex animate-pulse">
             <span className="text-neon-purple mr-2">➜</span>

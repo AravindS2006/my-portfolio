@@ -8,39 +8,49 @@ import {
   Radar, 
   Tooltip 
 } from 'recharts';
-import { Brain, Database, Cloud, Terminal } from 'lucide-react';
+import { Brain, Database, Cloud, Terminal, Cpu, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SkillCategory } from '../types';
 
 const data = [
-  { subject: 'Gen AI', A: 95, fullMark: 100 },
-  { subject: 'Prompt Eng', A: 90, fullMark: 100 },
-  { subject: 'Python/ML', A: 85, fullMark: 100 },
-  { subject: 'Fullstack', A: 80, fullMark: 100 },
-  { subject: 'Cloud/Ops', A: 75, fullMark: 100 },
-  { subject: 'Data Viz', A: 70, fullMark: 100 },
+  { subject: 'Gen AI / RL', A: 95, fullMark: 100 },
+  { subject: 'Python / ML', A: 90, fullMark: 100 },
+  { subject: 'Web / APIs', A: 85, fullMark: 100 },
+  { subject: 'Cloud/DevOps', A: 78, fullMark: 100 },
+  { subject: 'Hardware/IoT', A: 72, fullMark: 100 },
+  { subject: 'Data Science', A: 82, fullMark: 100 },
 ];
 
 const categories: SkillCategory[] = [
   {
-    category: "AI & Machine Learning",
-    icon: Brain,
-    skills: ["Generative AI", "LLM Fine-Tuning", "Prompt Engineering", "RAG Systems", "Model Optimization", "Deep Learning"]
-  },
-  {
-    category: "Programming & Frameworks",
+    category: "Languages",
     icon: Terminal,
-    skills: ["Python", "JavaScript (React, Next.js)", "TensorFlow", "PyTorch", "FastAPI", "REST API Development"]
+    skills: ["Python", "C", "C++", "JavaScript", "TypeScript", "Java"]
   },
   {
-    category: "Data Science",
+    category: "AI / ML",
+    icon: Brain,
+    skills: ["Machine Learning", "Generative AI", "Fine-Tuning", "RAG", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "Hugging Face Transformers", "Gemini API", "Reinforcement Learning", "NLP", "LLMs", "Vector Databases", "Prompt Engineering"]
+  },
+  {
+    category: "Web & APIs",
     icon: Database,
-    skills: ["Data Preprocessing", "Feature Engineering", "Model Training", "Evaluation Metrics", "Visualization"]
+    skills: ["React.js", "Node.js", "FastAPI", "HTML5", "CSS3", "REST APIs", "TypeScript"]
   },
   {
-    category: "Cloud & Tools",
+    category: "Cloud & DevOps",
     icon: Cloud,
-    skills: ["Google Cloud", "Hugging Face", "Docker", "Git/GitHub", "Vercel", "Cursor AI", "n8n Automation"]
+    skills: ["Google Cloud Platform", "AWS", "Vercel", "Render.com"]
+  },
+  {
+    category: "Hardware & IoT",
+    icon: Cpu,
+    skills: ["Arduino", "ESP32", "Firmware Prototyping", "Real-time Sensor Interfacing", "Embedded Systems"]
+  },
+  {
+    category: "Tools",
+    icon: Wrench,
+    skills: ["Claude Code", "VS Code", "Jupyter Notebook", "Cursor AI", "GitHub Copilot", "GitHub", "Linux"]
   }
 ];
 
@@ -95,7 +105,7 @@ const Skills: React.FC = () => {
         </motion.div>
 
         {/* Skill Lists */}
-        <div className="col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((cat, idx) => (
             <motion.div 
               key={idx}
