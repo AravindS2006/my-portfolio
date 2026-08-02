@@ -3,138 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aravindselvan C | AI Engineer & Prompt Engineering Specialist</title>
-    <meta name="description" content="Aravindselvan C — AI Engineer & Prompt Engineering Specialist based in Chennai, India. Expert in Generative AI, LLM Fine-Tuning, RAG pipelines, and full-stack AI applications." />
-    <meta name="keywords" content="AI Engineer, Prompt Engineering, Generative AI, LLM, RAG, Machine Learning, Chennai, India, Portfolio" />
+    <title>Aravindselvan C | Software Engineer Portfolio</title>
+    <meta name="description" content="Minimal professional portfolio of Aravindselvan C, Software Engineer focused on AI, ML, and full-stack development." />
+    <meta name="keywords" content="Aravindselvan C, Software Engineer, Portfolio, AI, Machine Learning, Full Stack" />
     <meta name="author" content="Aravindselvan C" />
-    <meta name="theme-color" content="#050510" />
+    <meta name="theme-color" content="#f8fafc" />
 
-    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Aravindselvan C | AI Engineer & Prompt Engineering Specialist" />
-    <meta property="og:description" content="AI Engineer building future-ready AI solutions — Generative AI, LLM Fine-Tuning, RAG pipelines, and scalable full-stack applications." />
-    <meta property="og:url" content="https://aravindselvan.vercel.app" />
+    <meta property="og:title" content="Aravindselvan C | Software Engineer Portfolio" />
+    <meta property="og:description" content="Professional portfolio featuring education, skills, projects, achievements, and resume." />
+    <meta property="og:url" content="https://aravind-portfolio-livid.vercel.app" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Aravindselvan C | AI Engineer" />
-    <meta name="twitter:description" content="AI Engineer building future-ready AI solutions — Generative AI, LLM Fine-Tuning, RAG pipelines." />
+    <meta name="twitter:title" content="Aravindselvan C | Software Engineer Portfolio" />
+    <meta name="twitter:description" content="Professional portfolio featuring AI, ML, and full-stack work." />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            colors: {
-              'neon-blue': '#00f3ff',
-              'neon-purple': '#bc13fe',
-              'dark-bg': '#050510',
-              'card-bg': '#0f1123',
-            },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              mono: ['Fira Code', 'monospace'],
             },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'shimmer': 'shimmer 2.5s linear infinite',
-              'gradient-x': 'gradient-x 4s ease infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              shimmer: {
-                '0%': { backgroundPosition: '-200% center' },
-                '100%': { backgroundPosition: '200% center' },
-              },
-              'gradient-x': {
-                '0%, 100%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-              },
-            }
           },
         },
-      }
+      };
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
       body {
-        background-color: #050510;
-        color: #e2e8f0;
         font-family: 'Inter', sans-serif;
-      }
-      html {
-        scroll-padding-top: 80px;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #050510;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #00f3ff, #bc13fe);
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #00f3ff, #bc13fe);
-        opacity: 0.9;
-      }
-      /* Selection color */
-      ::selection {
-        background: rgba(0, 243, 255, 0.2);
-        color: #00f3ff;
-      }
-      /* Smooth transitions for all elements */
-      * {
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      /* Gradient text utility */
-      .gradient-text {
-        background: linear-gradient(135deg, #00f3ff, #bc13fe);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      /* Glow effects */
-      .glow-blue {
-        box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), 0 0 40px rgba(0, 243, 255, 0.1);
-      }
-      .glow-purple {
-        box-shadow: 0 0 20px rgba(188, 19, 254, 0.3), 0 0 40px rgba(188, 19, 254, 0.1);
-      }
-      /* Loading screen fade */
-      .loading-fade-exit {
-        animation: loadingFadeExit 0.6s ease forwards;
-      }
-      @keyframes loadingFadeExit {
-        0% { opacity: 1; transform: scale(1); }
-        100% { opacity: 0; transform: scale(1.05); pointer-events: none; }
+        margin: 0;
+        background: #f8fafc;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.3.1",
-    "react/": "https://esm.sh/react@18.3.1/",
-    "react-dom": "https://esm.sh/react-dom@18.3.1",
-    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react,react-dom",
-    "recharts": "https://esm.sh/recharts@2.12.7?external=react,react-dom",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
