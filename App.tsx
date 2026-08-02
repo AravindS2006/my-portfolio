@@ -65,8 +65,8 @@ const App: React.FC = () => {
             <p className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4" /> Chennai, Tamil Nadu, India
             </p>
-            <a className="inline-flex items-center gap-2 hover:text-slate-900" href="https://aravind-portfolio-livid.vercel.app" target="_blank" rel="noreferrer">
-              <ExternalLink className="h-4 w-4" /> aravind-portfolio-livid.vercel.app
+            <a className="inline-flex items-center gap-2 hover:text-slate-900" href="https://aravindselvan.vercel.app" target="_blank" rel="noreferrer">
+              <ExternalLink className="h-4 w-4" /> aravindselvan.vercel.app
             </a>
           </div>
 
