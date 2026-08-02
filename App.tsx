@@ -51,8 +51,7 @@ const App: React.FC = () => {
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-500">Software Engineer</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">Aravindselvan C</h1>
           <p className="mt-5 max-w-3xl text-slate-600">
-            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in machine learning,
-            generative AI, and full-stack development. Finalist in IMC Prosperity 4 and recipient of IEEE funding for a
+            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in python programming. Finalist in IMC Prosperity 4 and recipient of IEEE funding for a
             medical AI prototype.
           </p>
 
