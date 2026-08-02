@@ -34,7 +34,7 @@ const About: React.FC = () => {
         >
           <p>
             I am a <strong className="text-white">Generative AI Engineer & AI/ML Developer</strong> based in Chennai, Tamil Nadu, India.
-            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in machine learning, generative AI, and full-stack development.
+            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in python programming.
           </p>
           <p>
             I have engineered 25+ end-to-end AI/ML systems spanning RL agents, latent diffusion pipelines, and NLP engines. Secured IEEE funding of <span className="text-neon-blue font-medium">$5,420</span> for the AirTon medical AI prototype and reached the finals of the <span className="text-neon-purple font-medium">IMC Prosperity 4</span> global algorithmic trading competition.
