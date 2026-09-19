@@ -1,193 +1,191 @@
-import React from 'react';
-import { ExternalLink, Github, Linkedin, Mail, MapPin, Phone, FileText } from 'lucide-react';
+// App.tsx — Modern Light Theme Engineering Portfolio with AI Agent Audit
+import React, { useState, useEffect } from 'react';
+import { ParticleCanvas } from './src/components/ParticleCanvas';
+import { DockNavigation } from './src/components/DockNavigation';
+import { HeroModern } from './src/components/HeroModern';
+import { AIAgentEvaluation } from './src/components/AIAgentEvaluation';
+import { ProjectsShowcase } from './src/components/ProjectsShowcase';
+import { ProblemSolvingHub } from './src/components/ProblemSolvingHub';
+import { SkillsBento } from './src/components/SkillsBento';
+import { ExperienceTimeline } from './src/components/ExperienceTimeline';
+import { ContactPortal } from './src/components/ContactPortal';
+import Footer from './components/Footer';
+import RecruiterModal from './components/RecruiterModal';
+import { CommandPalette } from './src/components/CommandPalette';
+import sound from './src/utils/sound';
+import { Zap, Command } from 'lucide-react';
 
-const education = [
-  {
-    title: 'B.E. – Electronics & Communications Engineering',
-    institution: 'Sri Sairam Engineering College, Chennai',
-    period: 'Sep 2023 – May 2027',
-    score: 'CGPA: 6.95 / 10.0',
-  },
-  {
-    title: 'Class 12 – Computer Mathematics',
-    institution: 'Akshaya Academy Matric Hr. Sec. School, Dindigul',
-    period: 'June 2022 – May 2023',
-    score: 'Score: 86% / 100%',
-  },
-];
+const sectionIds = ['overview', 'evaluation', 'projects', 'metrics', 'skills', 'experience', 'contact'];
 
-const projectHighlights = [
-  {
-    name: 'Airton — Handheld Medical AI Device',
-    stack: 'Python · ESP32 · IoT',
-    period: '2024 – 2027',
-    points: [
-      'Built an ML-powered hardware prototype for non-invasive glaucoma screening and secured IEEE funding of $5,420.',
-      'Integrated real-time sensor pipelines with ESP32 firmware for live biometric capture and on-device classification.',
-    ],
-  },
-  {
-    name: 'Ghibli Art Generator — Stylized Latent Diffusion Pipeline',
-    stack: 'Python · Hugging Face Diffusers · Gradio',
-    period: '2025',
-    points: ['Developed text-to-image and image-to-image pipeline with LoRA fine-tuning for high-fidelity style transfer.'],
-  },
-  {
-    name: 'Edumate — Smart Student Dashboard',
-    stack: 'React.js · Node.js · FastAPI · Python · Vercel · Render',
-    period: '2026',
-    points: [
-      'Designed and deployed a mobile-optimized dashboard with real-time attendance and data visualization.',
-      'Achieved sub-2 second load times on production deployment.',
-    ],
-  },
-];
+export const App: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<string>('overview');
+  const [isRecruiterModalOpen, setIsRecruiterModalOpen] = useState<boolean>(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(sound.getMuted());
+  const [showFloatingPills, setShowFloatingPills] = useState<boolean>(false);
 
-const App: React.FC = () => {
+  const handleToggleSound = () => {
+    const nextState = sound.toggleMute();
+    setIsMuted(nextState);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 140;
+      setShowFloatingPills(window.scrollY > 400);
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
+        if (section) {
+          const top = section.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(sectionIds[i]);
+            break;
+          }
+        }
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Command palette shortcut: Cmd+K or Ctrl+K
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        sound.playSwitch();
+        setIsCommandPaletteOpen((prev) => !prev);
+        return;
+      }
+
+      // Recruiter modal shortcut: R
+      const target = e.target as HTMLElement;
+      const isInput =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable;
+      if (!isInput && (e.key === 'r' || e.key === 'R') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        sound.playClick();
+        setIsRecruiterModalOpen((prev) => !prev);
+        return;
+      }
+
+      // Escape to close modals
+      if (e.key === 'Escape') {
+        setIsRecruiterModalOpen(false);
+        setIsCommandPaletteOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <main className="mx-auto w-full max-w-5xl px-6 py-10 md:px-10 md:py-14">
-        <header className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-500">Software Engineer</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">Aravindselvan C</h1>
-          <p className="mt-5 max-w-3xl text-slate-600">
-            Final-year B.E. ECE student at Sri Sairam Engineering College with hands-on expertise in python programming. Finalist in IMC Prosperity 4 and recipient of IEEE funding for a
-            medical AI prototype.
-          </p>
+    <div className="min-h-screen bg-white text-slate-900 relative selection:bg-indigo-500/15 selection:text-indigo-700 overflow-x-hidden font-sans">
+      {/* Dynamic interactive light coordinate web background */}
+      <ParticleCanvas />
 
-          <div className="mt-6 grid gap-3 text-sm text-slate-700 sm:grid-cols-2">
-            <a className="inline-flex items-center gap-2 hover:text-slate-900" href="mailto:aravindselvan2006@gmail.com">
-              <Mail className="h-4 w-4" /> aravindselvan2006@gmail.com
-            </a>
-            <a className="inline-flex items-center gap-2 hover:text-slate-900" href="tel:+918668147238">
-              <Phone className="h-4 w-4" /> +91 8668147238
-            </a>
-            <p className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4" /> Chennai, Tamil Nadu, India
-            </p>
-            <a className="inline-flex items-center gap-2 hover:text-slate-900" href="https://aravindselvan.vercel.app" target="_blank" rel="noreferrer">
-              <ExternalLink className="h-4 w-4" /> aravindselvan.vercel.app
-            </a>
-          </div>
+      {/* Global Ambient Pastel Gradients */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-indigo-100/40 via-blue-50/20 to-transparent rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="fixed bottom-0 right-0 w-[700px] h-[450px] bg-gradient-to-t from-emerald-50/30 via-slate-50/10 to-transparent rounded-full blur-[160px] pointer-events-none z-0" />
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="https://linkedin.com/in/aravindselvan-c"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-100"
-            >
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-            <a
-              href="https://github.com/AravindS2006"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-100"
-            >
-              <Github className="h-4 w-4" /> GitHub
-            </a>
-            <a
-              href="/assets/Aravindselvan_C_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
-            >
-              <FileText className="h-4 w-4" /> Resume
-            </a>
-          </div>
-        </header>
+      {/* Minimalist Light Glass Dock Navigation */}
+      <DockNavigation
+        activeSection={activeSection}
+        onOpenRecruiter={() => setIsRecruiterModalOpen(true)}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        isMuted={isMuted}
+        onToggleSound={handleToggleSound}
+      />
 
-        <section className="mt-8 grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-            <h2 className="text-lg font-semibold">Education</h2>
-            <div className="mt-4 space-y-5">
-              {education.map((item) => (
-                <article key={item.title}>
-                  <h3 className="font-medium text-slate-900">{item.title}</h3>
-                  <p className="text-sm text-slate-600">{item.institution}</p>
-                  <p className="mt-1 text-sm text-slate-500">{item.period} · {item.score}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+      {/* Main Page Flow */}
+      <main className="relative z-10">
+        {/* 01. Minimalist Light Hero with Live Status & Metric Bento */}
+        <HeroModern
+          onOpenRecruiter={() => setIsRecruiterModalOpen(true)}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        />
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-            <h2 className="text-lg font-semibold">Technical Skills</h2>
-            <ul className="mt-4 space-y-3 text-sm text-slate-700">
-              <li><span className="font-medium text-slate-900">Languages:</span> Python, C</li>
-              <li><span className="font-medium text-slate-900">Cloud & DevOps:</span> Google Cloud Platform, Vercel, Render.com</li>
-              <li><span className="font-medium text-slate-900">Hardware & IoT:</span> Arduino, ESP32, SDR</li>
-              <li><span className="font-medium text-slate-900">Tools:</span> Claude Code, VS Code, Jupyter Notebook, Cursor AI, GitHub Copilot, GitHub, Linux</li>
-            </ul>
-          </div>
-        </section>
+        {/* 02. AI Agent Technical Assessment & Recruiter Dossier */}
+        <AIAgentEvaluation />
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-          <h2 className="text-lg font-semibold">Internship Experience</h2>
-          <article className="mt-4">
-            <h3 className="font-medium text-slate-900">Advanced SDR for LEO Satellite Signal Acquisition and Ham Radio</h3>
-            <p className="text-sm text-slate-600">Coe - Space Technology, Sairam · Nov – Dec 2023</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-slate-700">
-              <li>Developed practical expertise in SDR, LEO satellite communication, antenna systems, and amateur radio through theory and lab sessions.</li>
-              <li>Designed, fabricated, and tested a 435 MHz half-wave dipole antenna for amateur satellite communication.</li>
-            </ul>
-          </article>
-        </section>
+        {/* 03. Flagship Projects Showcase & Architecture Inspector */}
+        <ProjectsShowcase />
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-          <h2 className="text-lg font-semibold">Projects</h2>
-          <div className="mt-4 space-y-6">
-            {projectHighlights.map((project) => (
-              <article key={project.name}>
-                <h3 className="font-medium text-slate-900">{project.name}</h3>
-                <p className="text-sm text-slate-600">{project.stack} · {project.period}</p>
-                <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-slate-700">
-                  {project.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
+        {/* 04. 900+ Problem Solving Proof & Interactive Code Runner */}
+        <ProblemSolvingHub />
 
-        <section className="mt-8 grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-            <h2 className="text-lg font-semibold">Achievements & Competitions</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-700">
-              <li>IMC Prosperity 4 — Finalist, Global Algorithmic Trading Competition</li>
-              <li>Airton Medical Device — Awarded $5,420 IEEE funding for AI-based glaucoma detection prototype</li>
-              <li>MSME Hackathon 2024 — Top 50 teams nationally</li>
-            </ul>
-          </div>
+        {/* 05. Engineering Competency Matrix & Recruiter Transparency */}
+        <SkillsBento />
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-            <h2 className="text-lg font-semibold">Certifications</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-700">
-              <li>Google Cloud / Coursera — Introduction to Generative AI</li>
-              <li>NPTEL — Machine Learning and Deep Learning Fundamentals; Computer Networks and Internet Protocol</li>
-              <li>HackerRank — Software Engineer Certificate; Python Basic & Problem Solving Basic</li>
-              <li>LinkedIn Learning — Advanced Prompt Engineering Techniques</li>
-            </ul>
-          </div>
-        </section>
+        {/* 06. CoE Space Tech SDR Internship & Academic Foundation */}
+        <ExperienceTimeline />
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
-          <h2 className="text-lg font-semibold">Competitive Programming & Profiles</h2>
-          <div className="mt-4 grid gap-2 text-sm text-slate-700 md:grid-cols-2">
-            <a className="hover:text-slate-900" href="https://leetcode.com/Aravindselvan" target="_blank" rel="noreferrer">LeetCode</a>
-            <a className="hover:text-slate-900" href="https://hackerrank.com/aravindselvan201" target="_blank" rel="noreferrer">HackerRank</a>
-            <a className="hover:text-slate-900" href="https://skillrack.com/profile/441693" target="_blank" rel="noreferrer">SkillRack</a>
-            <a className="hover:text-slate-900" href="https://learn.microsoft.com/users/aravindselvanc-2555" target="_blank" rel="noreferrer">Microsoft Learn</a>
-            <a className="hover:text-slate-900" href="https://geeksforgeeks.org/user/aravindselvan2006" target="_blank" rel="noreferrer">GeeksforGeeks</a>
-          </div>
-        </section>
-
-        <footer className="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-500">
-          © {new Date().getFullYear()} Aravindselvan C
-        </footer>
+        {/* 07. Friction-Free Recruiter Contact Portal & Resume Download */}
+        <ContactPortal />
       </main>
+
+      {/* Global Clean Light Footer */}
+      <div className="relative z-10">
+        <Footer />
+      </div>
+
+      {/* 30-Second Recruiter Fast-Track Executive HUD Modal */}
+      <RecruiterModal
+        isOpen={isRecruiterModalOpen}
+        onClose={() => setIsRecruiterModalOpen(false)}
+      />
+
+      {/* Spotlight Command Palette (Cmd+K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onOpenRecruiter={() => setIsRecruiterModalOpen(true)}
+        isMuted={isMuted}
+        onToggleSound={handleToggleSound}
+      />
+
+      {/* Floating Bottom Quick-Action Pill Bar */}
+      {showFloatingPills && (
+        <div className="fixed bottom-6 right-6 z-40 animate-fadeIn hidden sm:flex items-center gap-2">
+          {/* Quick Command Palette Pill */}
+          <button
+            onClick={() => {
+              sound.playSwitch();
+              setIsCommandPaletteOpen(true);
+            }}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-900 shadow-md transition-all text-xs font-mono group"
+            title="Command Palette (Ctrl+K / Cmd+K)"
+          >
+            <Command className="w-3.5 h-3.5 text-brand-indigo group-hover:rotate-12 transition-transform" />
+            <span>Search</span>
+            <kbd className="px-1.5 py-0.5 text-[10px] bg-slate-100 border border-slate-200 rounded text-slate-500">
+              ⌘K
+            </kbd>
+          </button>
+
+          {/* Quick Recruiter Snapshot Pill */}
+          <button
+            onClick={() => {
+              sound.playClick();
+              setIsRecruiterModalOpen(true);
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 hover:bg-brand-indigo text-white font-bold shadow-md hover:shadow-indigo-500/25 transition-all text-xs font-mono group"
+            title="Open 30-Second Recruiter Fast-Track (Press 'R')"
+          >
+            <Zap className="w-3.5 h-3.5 fill-white" />
+            <span>Recruiter Snapshot</span>
+            <kbd className="px-1.5 py-0.5 text-[10px] bg-white/20 border border-white/30 rounded text-white font-mono">
+              R
+            </kbd>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

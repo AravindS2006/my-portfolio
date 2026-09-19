@@ -1,45 +1,72 @@
 import React from 'react';
 
 export interface Project {
+  id: string;
   title: string;
   category: string;
+  filterTag: 'hardware' | 'fullstack' | 'algo-ml';
   description: string;
+  highlights: string[];
   techStack: string[];
-  liveLink?: string;
+  period?: string;
+  funding?: string;
+  result?: string;
   githubLink?: string;
-  image?: string;
-  stats?: string;
+  liveLink?: string;
+  buildMethodNote?: string;
+  badge?: string;
 }
 
-export interface Experience {
-  role: string;
-  company?: string;
-  period: string;
-  description: string[];
+export interface ExperienceItem {
+  title: string;
+  organization: string;
+  location: string;
+  duration: string;
+  highlights: string[];
+  badge?: string;
 }
 
-export interface SkillCategory {
-  category: string;
+export interface EducationItem {
+  degree: string;
+  institution: string;
+  location: string;
+  duration: string;
+  score: string;
+  relevantCoursework: string[];
+  note?: string;
+}
+
+export interface SkillCategoryTier {
+  id: string;
+  title: string;
+  badge: string;
+  badgeColor: string;
+  description: string;
   skills: string[];
-  icon: React.ComponentType<any>;
+  transparencyNote?: string;
+}
+
+export interface CodingProfileMetric {
+  platform: string;
+  handle: string;
+  url: string;
+  highlight: string;
+  stats: { label: string; value: string | number }[];
+  badges?: string[];
+  color: string;
+}
+
+export interface AchievementItem {
+  title: string;
+  issuer: string;
+  category: 'Grant' | 'Competition' | 'Certification' | 'Coursework';
+  description: string;
+  badge?: string;
+  date?: string;
+  url?: string;
 }
 
 export interface NavItem {
   label: string;
   href: string;
-}
-
-export interface Certification {
-  name: string;
-  issuer: string;
-  date?: string;
-  image?: string;
-}
-
-export interface Testimonial {
-  name: string;
-  role: string;
-  company: string;
-  testimonial: string;
-  image?: string;
 }

@@ -1,75 +1,34 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Github, Linkedin, Download, ChevronDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Download, Github, Linkedin, Mail, Check, Copy, Zap, ChevronDown, Award, Sparkles, Terminal } from 'lucide-react';
+import { personalInfo, aboutSummary } from '../data/portfolioData';
+import SpotlightCard from './SpotlightCard';
+import InteractiveTerminal from './InteractiveTerminal';
+
+interface HeroProps {
+  onOpenRecruiterModal?: () => void;
+}
 
 const roles = [
-  'Generative AI Engineer',
-  'AI/ML Developer',
-  'Full-Stack AI Builder',
-  'RL & LLM Systems Developer',
+  'Core Systems & Python Pipelines',
+  'Agentic Full-Stack Delivery',
+  'Hardware & IoT Sensor Prototyping',
+  'Algorithmic Problem Solving (900+ Solved)',
 ];
 
-const stats = [
-  { value: 25, suffix: '+', label: 'AI/ML Systems' },
-  { value: 5420, suffix: '$', label: 'IEEE Funding' },
-  { value: 3155, suffix: 'th', label: 'IMC Prosperity 4 Finalist' },
-  { value: 15, suffix: '+', label: 'Certifications' },
-];
-
-const useCountUp = (target: number, duration = 1500, start = false) => {
-  const [count, setCount] = useState(0);
-  const startedRef = useRef(false);
-  useEffect(() => {
-    if (!start || startedRef.current) return;
-    startedRef.current = true;
-    let startTime: number | null = null;
-    let animFrameId: number;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) animFrameId = requestAnimationFrame(step);
-    };
-    animFrameId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animFrameId);
-  }, [target, duration, start]);
-  return count;
-};
-
-const StatCard: React.FC<{ value: number; suffix: string; label: string; delay: number; startCount: boolean }> = ({ value, suffix, label, delay, startCount }) => {
-  const count = useCountUp(value, 1200, startCount);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5 }}
-      className="text-center px-4 py-3 bg-white/5 rounded-xl border border-white/10 hover:border-neon-blue/30 transition-colors"
-    >
-      <div className="text-2xl font-bold text-white font-mono">
-        {count}{suffix}
-      </div>
-      <div className="text-xs text-slate-400 mt-0.5">{label}</div>
-    </motion.div>
-  );
-};
-
-const Hero: React.FC = () => {
-  const resumeUrl = '/assets/resume.pdf';
+const Hero: React.FC<HeroProps> = ({ onOpenRecruiterModal }) => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
-  const [startCount, setStartCount] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
 
-  // Typewriter with multiple roles
+  // Typewriter effect
   useEffect(() => {
     const currentRole = roles[roleIndex];
-    const speed = isDeleting ? 30 : 55;
+    const speed = isDeleting ? 25 : 55;
 
     const timer = setTimeout(() => {
       if (!isDeleting && text === currentRole) {
-        setTimeout(() => setIsDeleting(true), 2000);
+        setTimeout(() => setIsDeleting(true), 2200);
         return;
       }
       if (isDeleting && text === '') {
@@ -77,193 +36,219 @@ const Hero: React.FC = () => {
         setRoleIndex((prev) => (prev + 1) % roles.length);
         return;
       }
-      setText(isDeleting ? currentRole.substring(0, text.length - 1) : currentRole.substring(0, text.length + 1));
+      setText(
+        isDeleting
+          ? currentRole.substring(0, text.length - 1)
+          : currentRole.substring(0, text.length + 1)
+      );
     }, speed);
 
     return () => clearTimeout(timer);
   }, [text, isDeleting, roleIndex]);
 
-  // Cursor blink
-  useEffect(() => {
-    const cursor = setInterval(() => setShowCursor((p) => !p), 500);
-    return () => clearInterval(cursor);
-  }, []);
-
-  // Start counter when hero is in view
-  useEffect(() => {
-    const timer = setTimeout(() => setStartCount(true), 1200);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const element = document.getElementById('projects');
-    if (element) {
-      window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-    }
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personalInfo.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleScrollToAbout = () => {
-    const element = document.getElementById('about');
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
     if (element) {
-      window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      const headerOffset = 75;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col items-center justify-center text-center z-10">
-      
-      {/* Status Badge */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
-      >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-        <span className="text-xs font-mono text-green-400 tracking-wider">AVAILABLE FOR OPPORTUNITIES</span>
-      </motion.div>
+    <section id="overview" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+      {/* Dynamic Ambient Background Illumination */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[450px] h-[320px] bg-purple-500/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[400px] h-[250px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
-      {/* Main Title */}
-      <motion.h1 
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-4"
-      >
-        Aravindselvan C
-      </motion.h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        {/* Availability Status Badge with Recruiter Trigger */}
+        <div className="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0a0e24]/90 border border-emerald-500/30 backdrop-blur-xl mb-7 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+          </span>
+          <span className="text-xs font-mono font-medium text-emerald-400 tracking-wide">
+            AVAILABLE FOR IMMEDIATE HIRE · CHENNAI / REMOTE / RELOCATION
+          </span>
+        </div>
 
-      {/* Typewriter subtitle */}
-      <div className="h-16 sm:h-12 flex items-center justify-center mb-6">
-        <h2 className="text-xl md:text-3xl font-light text-slate-300 font-mono">
-          <span className="text-neon-blue">{">"}</span>{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">{text}</span>
-          <span className="ml-1 text-neon-blue font-bold" style={{ opacity: showCursor ? 1 : 0 }}>_</span>
-        </h2>
+        {/* Candidate Name */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white mb-4">
+          <span className="bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+            {personalInfo.fullName}
+          </span>
+        </h1>
+
+        {/* Animated Typing Subtitle */}
+        <div className="h-12 flex items-center justify-center mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-black/40 border border-white/10 font-mono text-sm sm:text-xl text-slate-200">
+            <span className="text-neon-cyan font-bold font-mono">{">"}</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-purple-400 font-semibold">
+              {text}
+            </span>
+            <span className="inline-block w-2 h-5 bg-neon-cyan animate-pulse align-middle" />
+          </div>
+        </div>
+
+        {/* Professional Summary Narrative */}
+        <p className="max-w-3xl mx-auto text-base sm:text-lg text-slate-300 mb-10 leading-relaxed font-normal">
+          {aboutSummary.leadText} Awarded{' '}
+          <span className="text-neon-cyan font-semibold border-b border-neon-cyan/40">
+            $5,420 in competitive international IEEE grant funding
+          </span>{' '}
+          for the AirTon medical prototype, recognized as an{' '}
+          <span className="text-purple-400 font-semibold border-b border-purple-400/40">
+            IMC Prosperity 4 Global Finalist
+          </span>
+          , with over <span className="text-amber-400 font-semibold">900+ coding challenges solved</span>.
+        </p>
+
+        {/* Action Buttons Row */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 mb-14">
+          {/* Primary Projects CTA */}
+          <button
+            onClick={() => handleScrollToSection('projects')}
+            className="group inline-flex items-center gap-2 px-6 py-3.5 bg-neon-cyan text-dark-bg font-extrabold rounded-xl shadow-glow-cyan hover:bg-white hover:scale-105 transition-all duration-200 text-xs sm:text-sm"
+          >
+            <span>Explore Flagship Projects</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          {/* Recruiter Fast-Track Button */}
+          <button
+            onClick={onOpenRecruiterModal}
+            className="group inline-flex items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-white border border-purple-500/40 hover:border-cyan-400 rounded-xl font-bold transition-all duration-200 text-xs sm:text-sm shadow-sm hover:scale-105"
+          >
+            <Zap className="w-4 h-4 text-neon-cyan group-hover:animate-bounce" />
+            <span>Recruiter 30s Snapshot</span>
+          </button>
+
+          {/* Resume Download */}
+          <a
+            href={personalInfo.resumeUrl}
+            download={personalInfo.resumeDownloadName}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-3.5 bg-white/5 text-white border border-white/10 hover:border-neon-cyan/50 hover:bg-neon-cyan/10 rounded-xl font-medium transition-all duration-200 text-xs sm:text-sm shadow-sm"
+          >
+            <Download className="w-4 h-4 text-neon-cyan" />
+            <span>Download Resume</span>
+          </a>
+
+          {/* Copy Email Button */}
+          <button
+            onClick={handleCopyEmail}
+            className="inline-flex items-center gap-2 px-4 py-3.5 bg-white/5 text-slate-300 border border-white/10 hover:border-slate-400 hover:text-white rounded-xl text-xs sm:text-sm font-mono transition-all"
+            title="Copy email to clipboard"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-emerald-400 font-medium">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 text-slate-400" />
+                <span className="text-xs">{personalInfo.email}</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Bento Live Proof-of-Work Metric Cards (With Spotlight) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-14">
+          <SpotlightCard
+            spotlightColor="rgba(0, 245, 255, 0.16)"
+            className="p-5 text-left group"
+          >
+            <div className="text-3xl sm:text-4xl font-black text-white font-mono tracking-tight group-hover:text-neon-cyan transition-colors">
+              900+
+            </div>
+            <div className="text-xs font-bold text-slate-200 mt-1 uppercase tracking-wide">
+              Problems Solved
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              LeetCode (212+) & SkillRack (691)
+            </div>
+          </SpotlightCard>
+
+          <SpotlightCard
+            spotlightColor="rgba(16, 185, 129, 0.16)"
+            className="p-5 text-left group"
+          >
+            <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono tracking-tight group-hover:text-emerald-300 transition-colors">
+              $5,420
+            </div>
+            <div className="text-xs font-bold text-slate-200 mt-1 uppercase tracking-wide">
+              IEEE Grant Funding
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              AirTon Biomedical Prototype
+            </div>
+          </SpotlightCard>
+
+          <SpotlightCard
+            spotlightColor="rgba(168, 85, 247, 0.16)"
+            className="p-5 text-left group"
+          >
+            <div className="text-3xl sm:text-4xl font-black text-purple-400 font-mono tracking-tight group-hover:text-purple-300 transition-colors">
+              Finalist
+            </div>
+            <div className="text-xs font-bold text-slate-200 mt-1 uppercase tracking-wide">
+              IMC Prosperity 4
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              Global Algorithmic Challenge
+            </div>
+          </SpotlightCard>
+
+          <SpotlightCard
+            spotlightColor="rgba(59, 130, 246, 0.16)"
+            className="p-5 text-left group"
+          >
+            <div className="text-3xl sm:text-4xl font-black text-blue-400 font-mono tracking-tight group-hover:text-blue-300 transition-colors">
+              7,264
+            </div>
+            <div className="text-xs font-bold text-slate-200 mt-1 uppercase tracking-wide">
+              Diamond League
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              Google Developer Program
+            </div>
+          </SpotlightCard>
+        </div>
+
+        {/* Interactive Multi-Tab Developer Console */}
+        <div className="mb-14">
+          <InteractiveTerminal />
+        </div>
+
+        {/* Scroll Down Hint */}
+        <div className="flex flex-col items-center gap-1.5 text-slate-500">
+          <span className="text-[11px] font-mono tracking-widest uppercase">
+            Explore Verified Engineering Competencies
+          </span>
+          <button
+            onClick={() => handleScrollToSection('skills')}
+            className="p-1.5 text-slate-400 hover:text-neon-cyan transition-colors"
+            aria-label="Scroll down to Skills"
+          >
+            <ChevronDown className="w-5 h-5 animate-bounce" />
+          </button>
+        </div>
       </div>
-
-      {/* Description */}
-      <motion.p 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="max-w-2xl text-base text-slate-400 mb-8 leading-relaxed"
-      >
-        Final-year B.E. ECE student at Sri Sairam Engineering College. Engineered 25+ end-to-end AI/ML systems spanning RL agents, latent diffusion pipelines, and NLP engines. Secured IEEE funding of $5,420 for AirTon and reached the finals of the IMC Prosperity 4 global algorithmic trading competition.
-      </motion.p>
-
-      {/* CTA Buttons */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        className="flex flex-wrap items-center justify-center gap-3 mb-12"
-      >
-        <a 
-          href="#projects"
-          onClick={handleScrollToProjects}
-          className="group relative inline-flex items-center gap-2 px-7 py-3 bg-neon-blue text-dark-bg font-bold rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(0,243,255,0.45)]"
-        >
-          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-          <span className="relative">View Projects</span>
-          <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
-        </a>
-
-        <a 
-          href={resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-7 py-3 bg-white/5 text-white border border-white/15 rounded-full hover:bg-neon-purple/10 hover:border-neon-purple/50 transition-all"
-        >
-          <Download className="w-4 h-4 text-neon-purple" />
-          <span>Resume</span>
-        </a>
-
-        <a 
-          href="https://www.linkedin.com/in/aravindselvan-c/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-7 py-3 bg-white/5 text-white border border-white/10 rounded-full hover:bg-white/10 hover:border-neon-blue/30 transition-all"
-        >
-          <Linkedin className="w-4 h-4" />
-          <span>LinkedIn</span>
-        </a>
-        
-        <a 
-          href="https://github.com/AravindS2006" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-7 py-3 bg-white/5 text-white border border-white/10 rounded-full hover:bg-white/10 hover:border-white/30 transition-all"
-        >
-          <Github className="w-4 h-4" />
-          <span>GitHub</span>
-        </a>
-      </motion.div>
-
-      {/* Stats Grid */}
-      <motion.div
-        ref={statsRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-xl mb-12"
-      >
-        {stats.map((stat, i) => (
-          <StatCard key={stat.label} {...stat} delay={1 + i * 0.1} startCount={startCount} />
-        ))}
-      </motion.div>
-
-      {/* Terminal Preview */}
-      <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.1 }}
-        className="w-full max-w-3xl bg-card-bg/50 backdrop-blur border border-white/5 rounded-xl overflow-hidden shadow-2xl hidden md:block"
-      >
-        <div className="flex items-center px-4 py-2.5 bg-black/40 border-b border-white/5 gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <div className="ml-3 text-xs text-slate-500 font-mono">aravind@ai-core:~/projects</div>
-        </div>
-        <div className="p-6 text-left font-mono text-sm text-slate-300 space-y-2">
-          <div className="flex">
-            <span className="text-neon-purple mr-2">➜</span>
-            <span className="text-neon-blue mr-2">~</span>
-            <span>python3 model_training.py --optimize --epochs 50</span>
-          </div>
-          <div className="text-slate-400 pl-4 space-y-1">
-            <div><span className="text-yellow-400">[INFO]</span> Loading AirTon glaucoma detection model...</div>
-            <div><span className="text-blue-400">[INFO]</span> Initializing Tradenza RL agent for XAUUSD...</div>
-            <div><span className="text-green-400">[SUCCESS]</span> IEEE funding secured: <span className="text-white font-bold">$5,420</span></div>
-            <div><span className="text-green-400">[READY]</span> 25+ AI/ML systems deployed and running.</div>
-          </div>
-          <div className="flex animate-pulse">
-            <span className="text-neon-purple mr-2">➜</span>
-            <span className="text-neon-blue mr-2">~</span>
-            <span className="w-2 h-4 bg-slate-400 block mt-0.5"></span>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        onClick={handleScrollToAbout}
-        className="mt-12 flex flex-col items-center gap-1 text-slate-500 hover:text-neon-blue transition-colors group"
-        aria-label="Scroll down"
-      >
-        <span className="text-xs font-mono tracking-widest">SCROLL</span>
-        <ChevronDown className="w-4 h-4 animate-bounce group-hover:text-neon-blue" />
-      </motion.button>
-    </div>
+    </section>
   );
 };
 
 export default Hero;
+

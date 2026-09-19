@@ -1,293 +1,323 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare, Code2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2, MessageSquare, Copy, Check, Download, ExternalLink, Sparkles } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-
-const onlineProfiles = [
-  { name: 'LeetCode', url: 'https://leetcode.com/Aravindselvan', color: 'text-yellow-400', bg: 'hover:bg-yellow-400/10' },
-  { name: 'HackerRank', url: 'https://hackerrank.com/aravindselvan201', color: 'text-green-400', bg: 'hover:bg-green-400/10' },
-  { name: 'SkillRack', url: 'https://www.skillrack.com/faces/resume.xhtml?id=441693&key=c2110db4f08939a1bfc90e35bf38dec1b85f0453', color: 'text-blue-400', bg: 'hover:bg-blue-400/10' },
-  { name: 'Microsoft Learn', url: 'https://learn.microsoft.com/users/aravindselvanc-2555', color: 'text-neon-blue', bg: 'hover:bg-neon-blue/10' },
-  { name: 'GeeksForGeeks', url: 'https://geeksforgeeks.org/user/aravindselvan2006', color: 'text-green-500', bg: 'hover:bg-green-500/10' },
-];
+import { personalInfo } from '../data/portfolioData';
+import SpotlightCard from './SpotlightCard';
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    message: ''
+    subject: '',
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-  const [activeField, setActiveField] = useState<string | null>(null);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personalInfo.email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(personalInfo.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitError('');
     setIsSubmitting(true);
 
-    const env = import.meta.env as Record<string, string | undefined>;
+    const metaEnv = ((import.meta as unknown as { env?: Record<string, string | undefined> }).env) || {};
+    const procEnv = (typeof process !== 'undefined' ? (process.env as Record<string, string | undefined>) : {}) || {};
     const serviceId =
-      env.VITE_EMAILJS_SERVICE_ID ||
-      env.EMAILJS_SERVICE_ID ||
-      process.env.VITE_EMAILJS_SERVICE_ID ||
-      process.env.EMAILJS_SERVICE_ID ||
+      metaEnv.VITE_EMAILJS_SERVICE_ID ||
+      metaEnv.EMAILJS_SERVICE_ID ||
+      procEnv.VITE_EMAILJS_SERVICE_ID ||
+      procEnv.EMAILJS_SERVICE_ID ||
       '';
     const templateId =
-      env.VITE_EMAILJS_TEMPLATE_ID ||
-      env.EMAILJS_TEMPLATE_ID ||
-      process.env.VITE_EMAILJS_TEMPLATE_ID ||
-      process.env.EMAILJS_TEMPLATE_ID ||
+      metaEnv.VITE_EMAILJS_TEMPLATE_ID ||
+      metaEnv.EMAILJS_TEMPLATE_ID ||
+      procEnv.VITE_EMAILJS_TEMPLATE_ID ||
+      procEnv.EMAILJS_TEMPLATE_ID ||
       'template_oztcb36';
     const publicKey =
-      env.VITE_EMAILJS_PUBLIC_KEY ||
-      env.EMAILJS_PUBLIC_KEY ||
-      process.env.VITE_EMAILJS_PUBLIC_KEY ||
-      process.env.EMAILJS_PUBLIC_KEY ||
+      metaEnv.VITE_EMAILJS_PUBLIC_KEY ||
+      metaEnv.EMAILJS_PUBLIC_KEY ||
+      procEnv.VITE_EMAILJS_PUBLIC_KEY ||
+      procEnv.EMAILJS_PUBLIC_KEY ||
       'NIJzrybBeRV4_FTXD';
 
-    if (!serviceId.trim()) {
-      setSubmitError('Email service is not configured. Please try again later.');
-      setIsSubmitting(false);
-      return;
+    if (serviceId.trim()) {
+      try {
+        await emailjs.send(
+          serviceId.trim(),
+          templateId.trim(),
+          {
+            from_name: formState.name,
+            from_email: formState.email,
+            subject: formState.subject || 'Portfolio Inquiry',
+            message: formState.message,
+            reply_to: formState.email,
+          },
+          { publicKey: publicKey.trim() }
+        );
+
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setFormState({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 4000);
+        return;
+      } catch (error) {
+        console.warn('EmailJS service failed, falling back to mailto', error);
+      }
     }
 
-    try {
-      await emailjs.send(
-        serviceId.trim(),
-        templateId.trim(),
-        {
-          from_name: formState.name,
-          from_email: formState.email,
-          message: formState.message,
-          reply_to: formState.email
-        },
-        { publicKey: publicKey.trim() }
-      );
-
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormState({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 3000);
-    } catch (error) {
-      setIsSubmitting(false);
-      setSubmitError('Failed to send message. Please try again.');
-    }
+    // Graceful fallback to mailto
+    setIsSubmitting(false);
+    const subject = encodeURIComponent(formState.subject || `Opportunity Inquiry from ${formState.name}`);
+    const body = encodeURIComponent(
+      `Hello Aravindselvan,\n\nName: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
+    );
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16"
-      >
-        <p className="text-neon-blue font-mono text-sm tracking-widest mb-3">07. CONTACT</p>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
-        <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full"></div>
-      </motion.div>
+    <section id="contact" className="py-20 md:py-28 relative bg-[#050711]/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="text-neon-cyan font-mono text-xs tracking-widest uppercase mb-2">
+            07. Direct Connection & Recruitment
+          </p>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+            Get In Touch
+          </h2>
+          <div className="h-1 w-24 bg-gradient-to-r from-neon-cyan via-neon-blue to-purple-500 mx-auto rounded-full mb-5" />
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Actively seeking full-time fresher software developer and applied AI roles.
+            Open to immediate joining with relocation flexibility across major tech hubs.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Contact Info */}
-        <motion.div 
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8"
-        >
-          <div className="relative">
-             <h3 className="text-3xl font-bold text-white mb-4">Let's Connect</h3>
-             <p className="text-slate-400 text-lg leading-relaxed">
-               I'm actively seeking new opportunities to collaborate on AI and ML projects. 
-               Whether you're interested in Generative AI, RAG pipelines, or just want to geek out over the latest papers, I'd love to hear from you.
-             </p>
-             {/* Decorative element */}
-             <div className="absolute -top-10 -left-10 w-20 h-20 bg-neon-blue/10 rounded-full blur-xl animate-pulse"></div>
-          </div>
-          
-          <div className="space-y-4 pt-6">
-            <a 
-              href="mailto:aravindselvan2006@gmail.com" 
-              className="group flex items-center gap-4 text-slate-300 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-neon-blue/50 hover:bg-white/10 transition-all duration-300"
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+          {/* Direct Channels Column (5 cols) */}
+          <div className="lg:col-span-5 space-y-4 text-left">
+            <h3 className="text-xl font-bold text-white mb-4">Direct Contact Channels</h3>
+
+            {/* Email Card with Copy */}
+            <SpotlightCard
+              spotlightColor="rgba(0, 245, 255, 0.16)"
+              className="p-4 flex items-center justify-between gap-3 group"
             >
-              <div className="w-12 h-12 rounded-full bg-dark-bg flex items-center justify-center group-hover:scale-110 transition-transform">
-                 <Mail className="w-5 h-5 text-neon-blue" />
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-neon-cyan shadow-inner-glow">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Email Address</div>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="text-xs sm:text-sm font-mono text-white hover:text-neon-cyan transition-colors"
+                  >
+                    {personalInfo.email}
+                  </a>
+                </div>
+              </div>
+              <button
+                onClick={handleCopyEmail}
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 transition-colors"
+                title="Copy email address"
+              >
+                {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              </button>
+            </SpotlightCard>
+
+            {/* Phone Card with Copy */}
+            <SpotlightCard
+              spotlightColor="rgba(168, 85, 247, 0.16)"
+              className="p-4 flex items-center justify-between gap-3 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shadow-inner-glow">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Phone / WhatsApp</div>
+                  <a
+                    href={`tel:${personalInfo.phone}`}
+                    className="text-xs sm:text-sm font-mono text-white hover:text-neon-cyan transition-colors"
+                  >
+                    {personalInfo.phone}
+                  </a>
+                </div>
+              </div>
+              <button
+                onClick={handleCopyPhone}
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 transition-colors"
+                title="Copy phone number"
+              >
+                {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              </button>
+            </SpotlightCard>
+
+            {/* Location Card */}
+            <SpotlightCard
+              spotlightColor="rgba(59, 130, 246, 0.16)"
+              className="p-4 flex items-center gap-3.5"
+            >
+              <div className="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shadow-inner-glow">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs text-slate-500 block uppercase tracking-wider">Email</span>
-                <span className="font-mono text-white group-hover:text-neon-blue transition-colors">aravindselvan2006@gmail.com</span>
+                <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Location & Availability</div>
+                <div className="text-xs sm:text-sm font-mono text-white">
+                  {personalInfo.location} · <span className="text-emerald-400 font-semibold">Open to Relocation</span>
+                </div>
               </div>
-            </a>
-            
-            <a 
-              href="tel:+918668147238" 
-              className="group flex items-center gap-4 text-slate-300 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-neon-blue/50 hover:bg-white/10 transition-all duration-300"
-            >
-              <div className="w-12 h-12 rounded-full bg-dark-bg flex items-center justify-center group-hover:scale-110 transition-transform">
-                 <Phone className="w-5 h-5 text-neon-blue" />
-              </div>
-              <div>
-                <span className="text-xs text-slate-500 block uppercase tracking-wider">Phone</span>
-                <span className="font-mono text-white group-hover:text-neon-blue transition-colors">+91 86681 47238</span>
-              </div>
-            </a>
+            </SpotlightCard>
 
-            <div className="flex items-center gap-4 text-slate-300 p-4 bg-white/5 rounded-2xl border border-white/5">
-               <div className="w-12 h-12 rounded-full bg-dark-bg flex items-center justify-center">
-                 <MapPin className="w-5 h-5 text-neon-blue" />
+            {/* Social / Resume Action Panel */}
+            <div className="p-5 rounded-2xl bg-[#0a0e24]/80 border border-white/10 space-y-3 pt-4 backdrop-blur-xl">
+              <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+                Quick Professional Profiles
               </div>
-               <div>
-                <span className="text-xs text-slate-500 block uppercase tracking-wider">Location</span>
-                <span className="font-mono text-white">Chennai, India</span>
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href={personalInfo.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-[#0077b5]/20 border border-white/10 hover:border-[#0077b5]/50 text-xs font-medium text-white transition-all"
+                >
+                  <Linkedin className="w-4 h-4 text-[#0077b5]" />
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href={personalInfo.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-medium text-white transition-all"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>GitHub</span>
+                </a>
               </div>
+
+              <a
+                href={personalInfo.resumeUrl}
+                download={personalInfo.resumeDownloadName}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-neon-cyan text-dark-bg font-extrabold text-xs transition-all shadow-glow-cyan hover:bg-white"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Official Resume (PDF · 317 KB)</span>
+              </a>
             </div>
           </div>
-        </motion.div>
 
-        {/* Contact Form with Floating Effect */}
-        <motion.div 
-           initial={{ opacity: 0, scale: 0.9 }}
-           whileInView={{ opacity: 1, scale: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.6 }}
-           className="relative"
-        >
-           {/* Background Glow */}
-           <div className="absolute inset-0 bg-gradient-to-br from-neon-blue to-neon-purple blur-2xl opacity-20 transform rotate-6 rounded-3xl"></div>
-           
-           <div className="bg-card-bg p-8 rounded-3xl border border-white/10 shadow-2xl relative z-10 backdrop-blur-xl">
-              <div className="flex items-center gap-3 mb-6">
-                <MessageSquare className="text-neon-purple w-6 h-6" />
-                <h4 className="text-xl font-bold text-white">Send a Message</h4>
+          {/* Interactive Message Form (7 cols) */}
+          <div className="lg:col-span-7 bg-[#0a0e24]/90 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl text-left">
+            <div className="flex items-center gap-2.5 mb-6">
+              <div className="p-2 rounded-xl bg-cyan-500/10 text-neon-cyan border border-cyan-500/20">
+                <MessageSquare className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-white">Send a Direct Message</h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-slate-300">Your Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    placeholder="e.g. Technical Recruiter / Hiring Lead"
+                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan/40 transition-all placeholder:text-slate-600"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-slate-300">Your Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    placeholder="name@company.com"
+                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan/40 transition-all placeholder:text-slate-600"
+                  />
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1">
-                    <label htmlFor="name" className={`text-xs font-medium transition-colors ${activeField === 'name' ? 'text-neon-blue' : 'text-slate-400'}`}>Name</label>
-                    <input 
-                      type="text" 
-                      id="name"
-                      value={formState.name}
-                      onFocus={() => setActiveField('name')}
-                      onBlur={() => setActiveField(null)}
-                      onChange={(e) => setFormState({...formState, name: e.target.value})}
-                      className="w-full bg-dark-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all placeholder:text-slate-600"
-                      placeholder="John Doe"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label htmlFor="email" className={`text-xs font-medium transition-colors ${activeField === 'email' ? 'text-neon-blue' : 'text-slate-400'}`}>Email</label>
-                    <input 
-                      type="email" 
-                      id="email"
-                      value={formState.email}
-                      onFocus={() => setActiveField('email')}
-                      onBlur={() => setActiveField(null)}
-                      onChange={(e) => setFormState({...formState, email: e.target.value})}
-                      className="w-full bg-dark-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all placeholder:text-slate-600"
-                      placeholder="john@example.com"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-1">
-                  <label htmlFor="message" className={`text-xs font-medium transition-colors ${activeField === 'message' ? 'text-neon-blue' : 'text-slate-400'}`}>Message</label>
-                  <textarea 
-                    id="message"
-                    rows={4}
-                    value={formState.message}
-                    onFocus={() => setActiveField('message')}
-                    onBlur={() => setActiveField(null)}
-                    onChange={(e) => setFormState({...formState, message: e.target.value})}
-                    className="w-full bg-dark-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all resize-none placeholder:text-slate-600"
-                    placeholder="Tell me about your project..."
-                    required
-                  ></textarea>
-                </div>
+              <div className="space-y-1">
+                <label className="text-xs font-mono text-slate-300">Subject / Role Focus</label>
+                <input
+                  type="text"
+                  value={formState.subject}
+                  onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
+                  placeholder="e.g. Software Developer / Applied AI Role"
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan/40 transition-all placeholder:text-slate-600"
+                />
+              </div>
 
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting || submitted}
-                  className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-[1.02] ${
-                    submitted 
-                      ? 'bg-green-500 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]' 
-                      : 'bg-gradient-to-r from-neon-blue to-neon-purple text-white hover:shadow-[0_0_20px_rgba(188,19,254,0.4)]'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <Loader2 className="animate-spin w-5 h-5" />
-                  ) : submitted ? (
-                    "Message Sent!"
-                  ) : (
-                    <>
-                      Send Message <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-                {submitError && (
-                  <p className="text-red-400 text-sm">{submitError}</p>
+              <div className="space-y-1">
+                <label className="text-xs font-mono text-slate-300">Message *</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  placeholder="Tell me about the role, team, or challenge you're solving..."
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan/40 transition-all resize-none placeholder:text-slate-600"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting || submitted}
+                className={`w-full py-3.5 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 ${
+                  submitted
+                    ? 'bg-emerald-500 text-white shadow-glow-green'
+                    : 'bg-neon-cyan text-dark-bg hover:bg-white shadow-glow-cyan hover:scale-[1.01]'
+                }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Sending Inquiry...</span>
+                  </>
+                ) : submitted ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>Message Received / Mail Draft Opened!</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Send Recruiter Message</span>
+                  </>
                 )}
-              </form>
-           </div>
-        </motion.div>
+              </button>
+
+              <p className="text-[11px] text-slate-500 text-center font-mono pt-1">
+                Direct inquiries are monitored daily at {personalInfo.email}.
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
-
-      <motion.div 
-         initial={{ opacity: 0, y: 30 }}
-         whileInView={{ opacity: 1, y: 0 }}
-         viewport={{ once: true }}
-         transition={{ delay: 0.2 }}
-         className="mt-24 pt-8 border-t border-white/10 flex justify-center gap-8"
-      >
-          <a href="https://linkedin.com/in/aravindselvan-c" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
-            <span className="p-2 bg-white/5 rounded-full group-hover:bg-[#0077b5] group-hover:text-white transition-colors">
-              <Linkedin className="w-5 h-5" />
-            </span>
-            <span className="font-medium">LinkedIn</span>
-          </a>
-          <a href="https://github.com/AravindS2006" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
-             <span className="p-2 bg-white/5 rounded-full group-hover:bg-white group-hover:text-black transition-colors">
-              <Github className="w-5 h-5" />
-            </span>
-            <span className="font-medium">GitHub</span>
-          </a>
-      </motion.div>
-
-      {/* Competitive Programming & Online Profiles */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.4 }}
-        className="mt-12 pt-8 border-t border-white/5"
-      >
-        <div className="flex items-center gap-3 mb-6 justify-center">
-          <Code2 className="text-neon-blue w-5 h-5" />
-          <h4 className="text-lg font-bold text-white">Competitive Programming & Online Profiles</h4>
-        </div>
-        <div className="flex flex-wrap justify-center gap-3">
-          {onlineProfiles.map((profile) => (
-            <a
-              key={profile.name}
-              href={profile.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 ${profile.color} ${profile.bg} hover:border-current transition-all font-mono text-sm font-medium`}
-            >
-              {profile.name}
-            </a>
-          ))}
-        </div>
-      </motion.div>
-    </div>
+    </section>
   );
 };
 
 export default Contact;
+
