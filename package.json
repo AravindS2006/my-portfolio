@@ -1,29 +1,13 @@
 {
-  "name": "aravindselvan-c-portfolio",
+  "name": "aravindselvan-portfolio",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "engines": { "node": ">=22" },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "framer-motion": "11.0.8",
-    "lucide-react": "0.344.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "recharts": "2.12.7"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "autoprefixer": "^10.6.1",
-    "postcss": "^8.5.28",
-    "tailwindcss": "^3.4.19",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "dev": "node scripts/serve.mjs site",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "check": "node --check site/app.js && node --check site/profile.js"
   }
 }
