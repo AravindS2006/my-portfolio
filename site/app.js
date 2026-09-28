@@ -35,7 +35,7 @@ const studies = {
     label: '03 / STUDENT RESEARCH PROTOTYPE', title: 'AirTon', intro: 'Exploring portable ocular screening at the intersection of hardware and AI.',
     problem: 'The student team is exploring more accessible ocular screening. AirTon is a prototype and research effort, with work spanning sensors, microcontrollers and image analysis.',
     approach: 'The résumé describes an ESP32-based handheld prototype, Python processing and exploration of fundus-image machine learning. The associated funded project is listed by EPICS in IEEE under its formal Retino-Oculometric title.',
-    contribution: 'Student team member. My reported work includes ESP32 and sensor prototyping, AI exploration and contributing to a review manuscript. I describe the manuscript as research work rather than claiming a verified publication.',
+    contribution: 'Technical lead of the student project. I worked on the machine-learning component using AI tools. This describes my role and contribution; it does not imply independent model development or a validated medical result.',
     stack: ['ESP32 · IoT sensors','Python · C','Hardware prototyping · Applied AI'],
     limits: 'Not a clinically validated or approved diagnostic device. The $5,420 is team-project funding, not an individual prize. IEEE’s funded project has a formal title and March 2026 launch; its exact version relationship to the AirTon prototype is still being documented.',
     next: 'A useful next step: document individual contributions, prototype test methods and the relationship between the project versions.',
