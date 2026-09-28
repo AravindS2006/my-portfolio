@@ -23,8 +23,9 @@ npm run preview
 - `site/index.html`: homepage, selected projects, education, radio, learning and contact.
 - `site/app.js`: interactive theme selector, project case studies and email copy.
 - `site/styles.css`: responsive styling and reduced-motion support.
-- `site/profile.html`: concise recruiter brief with print / save as PDF.
+- `site/profile.html`: résumé content with a direct PDF download and print action.
 - `site/profile.js`: print action.
+- `site/Aravindselvan_C_Resume.pdf`: current corrected one-page résumé, linked from the homepage.
 - `scripts/`: dependency-free build and local preview utilities.
 - `dist/`: generated static output; excluded from Git.
 
@@ -45,6 +46,6 @@ Other static hosts can serve `dist/` after `npm run build`. The relative asset l
 - Funding is described as team-project funding; the ocular project is a research prototype.
 - Credentials link to their evidence. Learning badges are not labelled professional certifications.
 
-Update both the homepage and recruiter brief when facts change. The portfolio implementation itself was created with an AI coding agent and should not be treated as evidence of independent frontend expertise.
+Update the homepage, résumé PDF and profile page together when facts change. The portfolio implementation itself was created with an AI coding agent and should not be treated as evidence of independent frontend expertise.
 
-The original résumé, private research, master JSON brief, credentials and Sites configuration are intentionally excluded. Contact uses a mail link and clipboard; it does not pretend to submit a form. Fonts load from Google Fonts with local fallbacks. Project applications themselves were not runtime-verified as part of this portfolio.
+The original superseded résumé, private research, master JSON brief, credentials and Sites configuration are intentionally excluded. The corrected résumé is included for public recruiter access. Contact uses a mail link and clipboard; it does not pretend to submit a form. Fonts load from Google Fonts with local fallbacks. Project applications themselves were not runtime-verified as part of this portfolio.
