@@ -1,51 +1,43 @@
-# Aravindselvan C — Portfolio
+# Aravindselvan C — Engineering Portfolio
 
-A responsive static portfolio for an ECE undergraduate interested in programming, agent-built applications and amateur radio. Built with HTML, CSS and vanilla JavaScript; no application dependencies, API keys or backend required.
+A public portfolio for an ECE undergraduate (Class of 2027), amateur radio operator VU37AE, and student project lead. Rebuilt as an evidence-led engineering journal with seven static pages, real laboratory photographs and two focused résumés.
 
 ## Run locally
 
-Use Node.js 22 or newer:
+Node.js 22 or newer. No application dependencies or secrets are required.
 
 ```sh
 npm run dev
-```
-
-Open http://127.0.0.1:4173. There are no dependencies to install. Set `PORT` if that port is already in use.
-
-```sh
 npm run check
 npm run build
 npm run preview
 ```
 
-## Structure
+The local server uses http://127.0.0.1:4173. Set PORT to change it.
 
-- `site/index.html`: homepage, selected projects, education, radio, learning and contact.
-- `site/app.js`: interactive theme selector, project case studies and email copy.
-- `site/styles.css`: responsive styling and reduced-motion support.
-- `site/profile.html`: résumé content with a direct PDF download and print action.
-- `site/profile.js`: print action.
-- `site/Aravindselvan_C_Resume.pdf`: current corrected one-page résumé, linked from the homepage.
-- `scripts/`: dependency-free build and local preview utilities.
-- `dist/`: generated static output; excluded from Git.
+## Pages
 
-## Deploy
+- Homepage: selected work, project filters, personal journey, skills, learning, contact and résumé downloads.
+- RF case study: 435 MHz antenna design, team fabrication/testing context and documented FieldFox measurements.
+- AirTon: technical lead role, AI-assisted ML contribution and associated IEEE team funding with scope explained.
+- Edumate and Ghibli Art Generator: application context, source links and accurate AI-code attribution.
+- Learning archive: assessments, participation certificates, courses and learning modules with source links where available.
+- Recruiter profile: readable online summary and print action.
 
-For Vercel, import this repository. `vercel.json` selects the static build, runs `npm run build` and serves `dist`. If the existing Vercel project has an old Vite configuration, use this repository root and the checked-in configuration. Any connected Git deployment can run when its configured branch is pushed or merged.
+## Deployment
 
-Other static hosts can serve `dist/` after `npm run build`. The relative asset links also support a repository subpath. No SPA rewrites are needed. This repository does not enable GitHub Pages automatically.
+Vercel uses `npm run build` and `dist/` through `vercel.json`. Static hosts can serve the generated directory. The build copies the full public `site/` tree, including case studies, photographs, sitemap and both PDFs. The deployed Sites portfolio is https://aravindselvan-workbench.aravindselvan2006.chatgpt.site/.
 
 ## Content accuracy
 
-- Three selected projects: Edumate, Ghibli Art Generator and the AirTon student prototype.
-- Full-stack applications are explicitly attributed to agentic coding tools. Their technologies are not presented as personal framework proficiency.
-- ML-related subjects and Java are introductory exposure only.
-- SDR / HAM internship: 15–30 July 2026, CoE in Space Technology, Sri Sairam Engineering College.
-- HAM radio call sign: VU37AE, supplied by the candidate.
-- The paid ML programme is excluded. No unsupported hiring scores or percentile rankings.
-- Funding is described as team-project funding; the ocular project is a research prototype.
-- Credentials link to their evidence. Learning badges are not labelled professional certifications.
+Internship: Advanced SDR for LEO Satellite Signal Acquisition and Ham Radio Signals, Centre of Excellence - Space Technology, Sri Sairam Engineering College, **16–30 June 2026**. These dates supersede earlier July references.
 
-Update the homepage, résumé PDF and profile page together when facts change. The portfolio implementation itself was created with an AI coding agent and should not be treated as evidence of independent frontend expertise.
+Personal dipole design is candidate-confirmed; fabrication, mounting changes and measured results are attributed to the internship team. The return-loss photograph records approximately 21.9 dB at 426.79 MHz, distinct from the 435 MHz design target.
 
-The original superseded résumé, private research, master JSON brief, credentials and Sites configuration are intentionally excluded. The corrected résumé is included for public recruiter access. Contact uses a mail link and clipboard; it does not pretend to submit a form. Fonts load from Google Fonts with local fallbacks. Project applications themselves were not runtime-verified as part of this portfolio.
+Full-stack applications were implemented using AI coding agents; their dependencies do not establish personal framework proficiency. AirTon is a student research prototype, not a clinically validated device. The IEEE grant is team-project funding. ISRO records are participation, not employment or professional certifications. The paid ML programme is excluded.
+
+Public images are cropped document views from the supplied internship report. Raw research files and certificates containing date of birth are not included. Contact is an email link and clipboard action, not a submission form. Google Fonts has system-font fallbacks.
+
+## Maintenance
+
+Update the website, résumé PDFs and profile page together. Keep course types and personal contributions accurate. No live platform statistics or hiring guarantees are displayed.
