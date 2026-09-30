@@ -5,3 +5,6 @@
 .work-grid>*{min-width:0}.diagram .big-word{overflow-wrap:anywhere}.diagram .flow{flex-shrink:0}.media-label{max-width:calc(100% - 36px)}@media(max-width:760px){.diagram .big-word{font-size:48px}.project-card .diagram-orange .big-word{font-size:54px}.case-diagram .big-word{font-size:60px}.card-top{gap:12px}.card-top span:last-child{text-align:right}.case-content{min-width:0}.measurements{table-layout:fixed;overflow-wrap:anywhere}}
 
 .project-card .diagram{height:auto;min-height:350px;gap:16px}.project-card .diagram .big-word{flex-shrink:0}.project-card .diagram .diagram-tag,.project-card .diagram .note{flex-shrink:0}@media(min-width:761px){.project-card .diagram{height:350px}.card-media{height:350px}}
+
+/* Community project and evidence metadata */
+.diagram-seva{background:#d9e6e5;color:#153b3d}.evidence-note{font-size:14px!important;border-left:2px solid var(--orange);padding-left:16px}.measurements caption{text-align:left;color:var(--muted);font-size:14px;padding-bottom:12px}.case-content h3{font-size:24px;margin:30px 0 14px}.case-diagram .big-word{font-size:clamp(42px,6vw,82px)}.case-facts dd{overflow-wrap:anywhere}.project-card:last-child:nth-child(odd){max-width:100%}@media(max-width:760px){.case-diagram{padding:24px}.case-diagram .big-word{font-size:42px}.card-top{gap:12px;flex-wrap:wrap}}

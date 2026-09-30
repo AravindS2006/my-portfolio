@@ -1,6 +1,6 @@
 # Aravindselvan C — Engineering Portfolio
 
-A public portfolio for an ECE undergraduate (Class of 2027), amateur radio operator VU37AE, and student project lead. Rebuilt as an evidence-led engineering journal with seven static pages, real laboratory photographs and two focused résumés.
+A public portfolio for an ECE undergraduate (Class of 2027), amateur radio operator VU37AE, and student project lead. Rebuilt as an evidence-led engineering journal with eight static pages, real laboratory photographs and two focused résumés.
 
 ## Run locally
 
@@ -20,7 +20,9 @@ The local server uses http://127.0.0.1:4173. Set PORT to change it.
 - Homepage: selected work, project filters, personal journey, skills, learning, contact and résumé downloads.
 - RF case study: 435 MHz antenna design, team fabrication/testing context and documented FieldFox measurements.
 - AirTon: technical lead role, AI-assisted ML contribution and associated IEEE team funding with scope explained.
-- Edumate and Ghibli Art Generator: application context, source links and accurate AI-code attribution.
+- Edumate: mobile-access problem, API investigation, AI-assisted build, reported traffic and Vercel-to-Render migration.
+- Periyakottai Digital Seva: bilingual service assistance, request/grievance workflows and a directory-based assistant.
+- Ghibli Art Generator: hosted model integration with accurate AI-code attribution.
 - Learning archive: assessments, participation certificates, courses and learning modules with source links where available.
 - Recruiter profile: readable online summary and print action.
 
@@ -41,3 +43,5 @@ Public images are cropped document views from the supplied internship report. Ra
 ## Maintenance
 
 Update the website, résumé PDFs and profile page together. Keep course types and personal contributions accurate. No live platform statistics or hiring guarantees are displayed.
+
+Edumate usage of about 1,000 requests/day is candidate-reported, not a unique-user count. Periyakottai features were inspected in public source; official adoption and service outcomes are not established. Its assistant uses directory matching, not an LLM.
